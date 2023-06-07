@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="50dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/idTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="아이디"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/idEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idTextView"
+        android:layout_alignStart="@id/idTextView"
+        tools:text="dddddddddddddddd" />
+
+    <TextView
+        android:id="@+id/passwordTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idEditText"
+        android:layout_alignStart="@id/idTextView"
+        android:layout_marginTop="50dp"
+        android:text="비밀번호"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passwordTextView"
+        android:layout_alignStart="@id/idTextView"
+        android:inputType="numberPassword"
+        tools:text="1231231232123" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passwordEditText"
+        android:layout_alignEnd="@id/passwordEditText"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/black"
+        android:text="취소"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passwordEditText"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_toLeftOf="@id/cancelButton"
+        android:backgroundTint="@color/black"
+        android:text="로그인"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>
