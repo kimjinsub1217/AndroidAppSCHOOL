@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <!--    [Chip]
+    style : chip의 모양을 설정한다. 생략시 Action, Choice, Entry, Filter
+    Checkable : 체크가 가능한가.
+    Text : 표시할 문자열
+    chipicon : chip에 표시할 아이콘
+    chipIconVisible : chip 아이콘을 표시할 것인가
+    checkedIcon : 선택되었을 때의 아이콘
+    checkedIconVisible : 선택되었을 때의 아이콘을 표시할 것인-->
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Action"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip2"
+        style="@style/Widget.MaterialComponents.Chip.Choice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="choice"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip3"
+        style="@style/Widget.MaterialComponents.Chip.Entry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="entry"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip4"
+        style="@style/Widget.Material3.Chip.Filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="filter"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:checkedChip="@id/chip6"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip5"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="radio1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip6"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="radio2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip7"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="radio3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="버튼 1" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+</LinearLayout>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <!--    [CheckedTextView]
+        clickable : 터치에 대해 반응하도록 설정한다.
+        text : 표시할 문자열
+        drawableLeft : 좌측에 표시할 이미지
+        drawableRight : 우측에 표시할 이미지
+        drawableTop : 상단에 표시할 이미지
+        drawableBottom : 하단에 표시할 이미지-->
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+    <CheckedTextView
+        android:id="@+id/checkedTextView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:clickable="true"
+        android:text="checkBox1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <CheckedTextView
+        android:id="@+id/checkedTextView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+        android:text="checkBox2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <CheckedTextView
+        android:id="@+id/checkedTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+        android:text="radio1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <CheckedTextView
+        android:id="@+id/checkedTextView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+        android:text="radio2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <CheckedTextView
+        android:id="@+id/checkedTextView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+        android:text="radio3"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+</LinearLayout>
