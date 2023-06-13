@@ -41,9 +41,12 @@ class MainActivity : AppCompatActivity() {
                     progress: Int,
                     fromUser: Boolean
                 ) {
-                    amount = progress + 5000
+                    amount = (progress / 5000) * 5000
+                    seekBar.progress = amount
                     // 계산된 값 활용
-                    amountTextView.text = "${amount}\n"
+                    amountTextView.text = "${amount} 원\n "
+
+
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar) {

@@ -9,97 +9,143 @@ import com.test.android20_zoo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    private val animal = mutableListOf<Animal>()
+    private val elephantList = mutableListOf<Animal>()
+    private val catList = mutableListOf<Animal>()
+    private val dogList = mutableListOf<Animal>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         binding.run {
-            binding.zooGroup.setOnCheckedChangeListener { group, checkedId ->
+            zooGroup.setOnCheckedChangeListener { group, checkedId ->
                 val selectedRadioButton = findViewById<RadioButton>(checkedId)
                 val selectedAnimal = selectedRadioButton.text.toString()
-
                 when (selectedAnimal) {
                     "코끼리" -> {
-                        elephant()
-
+                        radioButtonName.text = selectedAnimal
+                        type.text = "동물 종류 : $selectedAnimal"
+                        food.text = "먹이 : 나뭇잎"
+                        skill.text = "코의 길이 : "
                     }
 
                     "고양이" -> {
-
-                        var radioButton = "고양이"
-                        var catFood = "고양이 사료"
-                        radioButtonName.text = radioButton
-                        type.text = "동물 종류 : $radioButton"
-                        food.text = "먹이 : $catFood"
-                        var catName = name.text.toString()
+                        radioButtonName.text = selectedAnimal
+                        type.text = "동물 종류 : $selectedAnimal"
+                        food.text = "먹이 : 고양이 사료"
                         skill.text = "냥편치 속도 : "
-                        var nyangpyeonchi = skillInfo.text.toString()
-
-                        var cat = Animal(radioButton, catFood, catName, nyangpyeonchi)
-                        animal.add(cat)
                     }
 
                     "강아지" -> {
-                        var radioButton = "강아지"
-                        var dogFood = "강아지 사료"
-                        radioButtonName.text = radioButton
-                        type.text = "동물 종류 : $radioButton"
-                        food.text = "먹이 : $dogFood"
-                        var dogName = name.text.toString()
+                        radioButtonName.text = selectedAnimal
+                        type.text = "동물 종류 : $selectedAnimal"
+                        food.text = "먹이 : 강아지 사료"
                         skill.text = "개인기 갯수 : "
-                        var skills = skillInfo.text.toString()
-
-                        var dog = Animal(radioButton, dogFood, dogName, skills)
-                        animal.add(dog)
                     }
 
-                    else -> "알 수 없음"
+                    else -> {
+                        radioButtonName.text = ""
+                        type.text = ""
+                        food.text = ""
+                        skill.text = ""
+                    }
                 }
             }
 
-
             button.setOnClickListener {
-                var elephantCount = 0
-                var catCount = 0
-                var dogCount = 0
-                elephant()
-
-
-                for (i in animal) {
-                    if (i.type == "코끼리") {
-                        elephantCount++
-                    }
-                    if (i.type == "고양이"){
-                        catCount++
-                    }
-                    if(i.type =="강아지"){
-                        dogCount++
-                    }
+                val selectedAnimal = zooGroup.checkedRadioButtonId
+                val radioButton = when (selectedAnimal) {
+                    R.id.elephantButton -> "코끼리"
+                    R.id.catButton -> "고양이"
+                    R.id.dogButton -> "강아지"
+                    else -> ""
                 }
-                animalsTextView.text="코끼리 : $elephantCount\n 고양이 : $catCount\n 강아지 : $dogCount"
+
+                val food = when (selectedAnimal) {
+                    R.id.elephantButton -> "나뭇잎"
+                    R.id.catButton -> "고양이 사료"
+                    R.id.dogButton -> "강아지 사료"
+                    else -> ""
+                }
+
+                val name = nameInfo.text.toString()
+                val skill = skillInfo.text.toString()
+
+                val animal = Animal(radioButton, food, name, skill)
+
+                when (selectedAnimal) {
+                    R.id.elephantButton -> elephantList.add(animal)
+                    R.id.catButton -> catList.add(animal)
+                    R.id.dogButton -> dogList.add(animal)
+                }
+
+                val elephantCount = elephantList.size
+                val catCount = catList.size
+                val dogCount = dogList.size
+
+                animalsTextView.text = "코끼리: $elephantCount\n고양이: $catCount\n강아지: $dogCount\n"
+                val stringBuilder = StringBuilder()
+
+
+                        for (i in elephantList) {
+                            var type = i.type
+                            var food = i.food
+                            var name = i.name
+                            var skill = i.skill
+
+                            stringBuilder.append("동물 타입 : $type\n")
+                            stringBuilder.append("먹이 : $food\n")
+                            stringBuilder.append("이름 : $name\n")
+                            stringBuilder.append("코의 길이 : $skill\n")
+
+                            stringBuilder.append("\n")
+                        }
+
+
+
+                        for (i in catList) {
+                            var type = i.type
+                            var food = i.food
+                            var name = i.name
+                            var skill = i.skill
+
+                            stringBuilder.append("동물 타입 : $type\n")
+                            stringBuilder.append("먹이 : $food\n")
+                            stringBuilder.append("이름 : $name\n")
+                            stringBuilder.append("냥편치 속도 : ${skill}km\n")
+
+                            stringBuilder.append("\n")
+                        }
+
+
+
+
+                        for (i in dogList) {
+                            var type = i.type
+                            var food = i.food
+                            var name = i.name
+                            var skill = i.skill
+
+                            stringBuilder.append("동물 타입 : $type\n")
+                            stringBuilder.append("먹이 : $food\n")
+                            stringBuilder.append("이름 : $name\n")
+                            stringBuilder.append("개인기 갯수 : ${skill}km\n")
+
+                            stringBuilder.append("\n")
+                        }
+
+
+
+
+
+                infoTextView.text = stringBuilder.toString()
+
+                nameInfo.setText("")
+                skillInfo.setText("")
             }
         }
     }
-
-    private fun ActivityMainBinding.elephant() {
-        var radioButton = "코끼리"
-        var elephantFood = "나뭇잎"
-        radioButtonName.text = radioButton
-        type.text = "동물 종류 : $radioButton"
-        food.text = "먹이 : $elephantFood"
-        var elephantName = name.text.toString()
-        skill.text = "코의길이 : "
-        var noseLength = skillInfo.text.toString()
-
-        var elephant = Animal(radioButton, elephantFood, elephantName, noseLength)
-        animal.add(elephant)
-    }
 }
 
-
 data class Animal(var type: String, var food: String, var name: String, var skill: String)
-
