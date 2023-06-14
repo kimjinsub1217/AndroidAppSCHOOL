@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         "일본",
         "독일",
         "브라질",
-        "대한민국1111111111111111111111"
+        "대한민국11111111111111"
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
