@@ -6,16 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.test.android33_customadapter_row.databinding.ActivityMainBinding
+import com.test.android33_customadapter_row.databinding.RowBinding
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
-    val data1 = arrayOf("데이터1","데이터2","데이터3","데이터4","데이터5", )
+    val data1 = arrayOf("데이터1", "데이터2", "데이터3", "데이터4", "데이터5")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
+
+        binding.run {
+            listView.run {
+                adapter = CustomAdapter()
+            }
+        }
     }
 
     // AdapterClass
@@ -27,18 +34,59 @@ class MainActivity : AppCompatActivity() {
         override fun getCount(): Int {
             return data1.size
         }
+
         // 현재 번째의 로우 View를 반환하도록 만들어준다.
         override fun getItem(position: Int): Any? {
             return null
         }
+
         // 현재 번째의 로우 View의 ID를 반환하도록 만들어준다.
         override fun getItemId(position: Int): Long {
             return 0
         }
+
         // 로우로 사용할 View를 생성하여 반환하는 메서드
         // 여기서 반환하는 View를 현재 번째의 Row로 사용한다.
+        // 첫 번째 : 구성하고자 하는 Row의 순서값( 0부터 1씩 증가)
+        // 두 번째 : 재사용 가능한 View가 있디먄 메게변수로 돌아온다.
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            return 0
+            // layout binding 객체를 담을 변수
+            var rowBiding: RowBinding? = null
+            // 항목 View를 담을 변수
+            var mainView = convertView
+
+            // 재사용 가능한 뷰가 없다면..
+            if (mainView == null) {
+                // ViewBinding 객체를 생성한다.
+                rowBiding = RowBinding.inflate(layoutInflater)
+                mainView = rowBiding.root
+                // ViewBinding 객체를 View에 저장한다.
+                mainView!!.tag = rowBiding
+            }
+            // 재사용 가능한 View가 있다면
+            else {
+                // View에 저장되어 있는 ViewBinding 객체를 추출한다.
+                rowBiding = mainView!!.tag as RowBinding
+            }
+            rowBiding.run {
+                textViewRow1.run {
+                    text = data1[position]
+                }
+
+                buttonRow1.run {
+                    setOnClickListener {
+                        binding.textViewResult.text = "$position : 버튼1"
+                    }
+                }
+
+                buttonRow2.run {
+                    setOnClickListener {
+                        binding.textViewResult.text = "$position : 버튼2"
+                    }
+                }
+            }
+
+            return mainView
         }
     }
 }
