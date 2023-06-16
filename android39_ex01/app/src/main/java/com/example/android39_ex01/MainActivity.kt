@@ -63,7 +63,6 @@ class MainActivity : AppCompatActivity() {
 
                     recyclerView.adapter = adapter
                     recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
-                    registerForContextMenu(recyclerView)
                     adapter.notifyDataSetChanged()
                 }
 
