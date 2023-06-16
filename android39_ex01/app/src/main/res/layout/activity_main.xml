@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/inputLinerarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/nameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="이름을 입력하세요." />
+
+        <EditText
+            android:id="@+id/ageEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="나이를 입력하세요" />
+
+        <EditText
+            android:id="@+id/korScoreEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="국어 점수를 입력하세요." />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
