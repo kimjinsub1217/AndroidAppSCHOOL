@@ -6,7 +6,7 @@
         android:title="등록화면보기" />
 
     <item
-        android:id="@+id/resulttItem"
+        android:id="@+id/resultItem"
         android:title="등록결과보기" />
 
 </menu>

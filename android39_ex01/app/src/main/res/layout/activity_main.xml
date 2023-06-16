@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/inputLinerarLayout"
+        android:id="@+id/inputLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -18,24 +18,28 @@
             android:id="@+id/nameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="이름을 입력하세요." />
+            android:hint="이름을 입력하세요."
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/ageEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="나이를 입력하세요" />
+            android:hint="나이를 입력하세요"
+            android:inputType="number" />
 
         <EditText
             android:id="@+id/korScoreEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="국어 점수를 입력하세요." />
+            android:hint="국어 점수를 입력하세요."
+            android:inputType="number" />
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 </LinearLayout>
