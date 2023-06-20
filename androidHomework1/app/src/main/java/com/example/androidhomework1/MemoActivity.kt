@@ -40,7 +40,7 @@ class MemoActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
+        menuInflater.inflate(R.menu.add_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -56,10 +56,11 @@ class MemoActivity : AppCompatActivity() {
     }
 
     inner class RecyclerAdapterClass :
-        RecyclerView.Adapter<RecyclerAdapterClass.ViewHolderClass>() {
-        inner class ViewHolderClass(memoItemBinding: MemoItemBinding) :
-            RecyclerView.ViewHolder(memoItemBinding.root), View.OnCreateContextMenuListener, View.OnClickListener {
-            var categoryName: TextView = memoItemBinding.categoryName
+        RecyclerView.Adapter<RecyclerAdapterClass.MemoViewHolderClass>() {
+        inner class MemoViewHolderClass(memoItemBinding: MemoItemBinding) :
+            RecyclerView.ViewHolder(memoItemBinding.root), View.OnCreateContextMenuListener,
+            View.OnClickListener {
+            var memoTextView: TextView = memoItemBinding.memoTextView
 
             init {
                 itemView.setOnCreateContextMenuListener(this)
@@ -71,60 +72,64 @@ class MemoActivity : AppCompatActivity() {
                 v: View?,
                 menuInfo: ContextMenu.ContextMenuInfo?
             ) {
-                menu?.setHeaderTitle(dataList[adapterPosition].name)
-                menuInflater.inflate(R.menu.item_category_menu, menu)
-
-                menu?.findItem(R.id.modifyButton)?.setOnMenuItemClickListener {
-                    val position = adapterPosition
-                    if (position != RecyclerView.NO_POSITION) {
-                        modifiyPosition = position
-                        val modifiyIntent = Intent(this@MainActivity, ModifiyActivity::class.java)
-                        modifiyActivityResultLauncher.launch(modifiyIntent)
-
-
-                    }
-                    true
-                }
+                menu?.setHeaderTitle(memoList[adapterPosition].memo)
+                menuInflater.inflate(R.menu.item_memo_menu, menu)
 
                 menu?.findItem(R.id.DeleteButton)?.setOnMenuItemClickListener {
                     val position = adapterPosition
                     if (position != RecyclerView.NO_POSITION) {
-                        dataList.removeAt(position)
+                        memoList.removeAt(position)
                         notifyItemRemoved(position)
                     }
                     true
                 }
+
+//                menu?.findItem(R.id.DeleteButton)?.setOnMenuItemClickListener {
+//                    val position = adapterPosition
+//                    if (position != RecyclerView.NO_POSITION) {
+//                        modifiyPosition = position
+//                        val modifiyIntent = Intent(this@MemoActivity, ModifiyActivity::class.java)
+//                        modifiyActivityResultLauncher.launch(modifiyIntent)
+//
+//
+//                    }
+//                    true
+//                }
+
             }
 
             override fun onClick(v: View?) {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val clickedItem = dataList[position]
-                    Log.d("확인", "Clicked item: ${clickedItem.name}")
-                    val memoIntent = Intent(this@MainActivity, MemoActivity::class.java)
-                    memoIntent.putExtra("name", clickedItem.name)
-                    this@MainActivity.startActivity(memoIntent)
-
+//                    val clickedItem = dataList[position]
+//                    Log.d("확인", "Clicked item: ${clickedItem.name}")
+//                    val memoIntent = Intent(this@MainActivity, MemoActivity::class.java)
+//                    memoIntent.putExtra("name", clickedItem.name)
+//                    this@MainActivity.startActivity(memoIntent)
                 }
             }
-
-
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
-            TODO("Not yet implemented")
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MemoViewHolderClass {
+            val itemBinding = MemoItemBinding.inflate(layoutInflater)
+            val viewHolderClass = MemoViewHolderClass(itemBinding)
+            val params = RecyclerView.LayoutParams(
+                RecyclerView.LayoutParams.MATCH_PARENT,
+                RecyclerView.LayoutParams.WRAP_CONTENT
+            )
+            itemBinding.root.layoutParams = params
+            return viewHolderClass
         }
 
-        override fun getItemCount(): Int {
-            TODO("Not yet implemented")
-        }
+        override fun getItemCount() = memoList.size
 
-        override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
-            TODO("Not yet implemented")
+        override fun onBindViewHolder(holder: MemoViewHolderClass, position: Int) {
+            holder.memoTextView.text = "메모$ {position+1} :${memoList[position].memo}"
         }
 
 
     }
 
+}
 
 data class memoClass(var memo: String)
