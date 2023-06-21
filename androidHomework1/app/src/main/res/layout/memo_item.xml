@@ -2,18 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="15dp">
+    android:layout_marginTop="15dp">
 
 
     <TextView
-        android:id="@+id/memoTextView"
+        android:id="@+id/nameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/black"
-        tools:text="카테고리 이름" />
+        android:layout_marginTop="5dp"
+        tools:text="메모 이름" />
+
+    <View
+        android:background="#B3B3B3"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
 
 </LinearLayout>

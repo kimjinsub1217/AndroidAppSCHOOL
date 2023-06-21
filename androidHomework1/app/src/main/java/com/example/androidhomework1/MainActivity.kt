@@ -114,8 +114,8 @@ class MainActivity : AppCompatActivity() {
                     if (position != RecyclerView.NO_POSITION) {
                         modifiyPosition = position
                         val modifiyIntent = Intent(this@MainActivity, ModifiyActivity::class.java)
+                        modifiyIntent.putExtra("name",dataList[adapterPosition].name)
                         modifiyActivityResultLauncher.launch(modifiyIntent)
-
 
                     }
                     true
@@ -138,12 +138,11 @@ class MainActivity : AppCompatActivity() {
                     Log.d("확인", "Clicked item: ${clickedItem.name}")
                     val memoIntent = Intent(this@MainActivity, MemoActivity::class.java)
                     memoIntent.putExtra("name", clickedItem.name)
+                    memoIntent.putExtra("position", position)
                     this@MainActivity.startActivity(memoIntent)
 
                 }
             }
-
-
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
@@ -162,7 +161,7 @@ class MainActivity : AppCompatActivity() {
         override fun getItemCount() = dataList.size
 
         override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
-            holder.categoryName.text = "${position + 1}번 : ${dataList[position].name}"
+            holder.categoryName.text = "${dataList[position].name}"
         }
     }
 }

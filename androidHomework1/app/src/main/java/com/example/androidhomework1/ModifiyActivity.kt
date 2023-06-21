@@ -16,12 +16,13 @@ class ModifiyActivity : AppCompatActivity() {
         binding = ActivityModifiyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        val name = intent.getStringExtra("name")
         binding.run {
-
+            categoryName.text = name.toString()
             addButton.setOnClickListener {
+
                 val modifyText = modifyEditText.text.toString()
-                Log.i("ㅋㅋㅋ",modifyText)
+
                 val intent = Intent()
                 intent.putExtra("modify", modifyText)
                 setResult(RESULT_OK, intent)

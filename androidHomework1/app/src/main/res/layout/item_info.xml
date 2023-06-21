@@ -9,8 +9,15 @@
         android:id="@+id/categoryName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold"
         tools:text="카테고리 이름" />
+
+    <View
+        android:background="#B3B3B3"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 
 </LinearLayout>

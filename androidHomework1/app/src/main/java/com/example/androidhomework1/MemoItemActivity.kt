@@ -16,11 +16,12 @@ class MemoItemActivity : AppCompatActivity() {
 
         binding.run {
             addButton.setOnClickListener {
-                var categoryName = categoryNameEditText.text.toString()
-                Log.d("CategoryName", categoryName)
+                var memoName = memoNameEditText.text.toString()
+                var memoDetail = memoDetailEditText.text.toString()
 
                 val resultIntent = Intent()
-                resultIntent.putExtra("categoryName", categoryName)
+                resultIntent.putExtra("memoName", memoName)
+                resultIntent.putExtra("memoDetail", memoDetail)
                 setResult(RESULT_OK, resultIntent)
                 finish()
             }

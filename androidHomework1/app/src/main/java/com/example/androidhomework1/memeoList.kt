@@ -1,4 +1,7 @@
 package com.example.androidhomework1
 
-class memeoList {
+object memeoList {
+    val myMemoList: MutableMap<String, MutableList<MemoClass>> = mutableMapOf()
+
+    data class MemoClass(var name: String, var detail: String)
 }

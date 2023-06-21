@@ -8,6 +8,16 @@
     android:orientation="vertical"
     tools:context=".AddCategoryActivity">
 
+    <TextView
+        android:id="@+id/categoryName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2196F3"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        android:text="카테고리 추가" />
+
     <EditText
         android:id="@+id/categoryNameEditText"
         android:layout_width="match_parent"
