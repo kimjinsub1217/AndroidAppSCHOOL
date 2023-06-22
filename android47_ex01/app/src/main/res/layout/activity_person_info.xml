@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".PersonInfoActivity">
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="match_parent"
+        android:text="이름 : "
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="match_parent"
+        android:text="날짜 : "
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/genderTextView"
+        android:layout_width="match_parent"
+        android:text="성별 : "
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/hobbyTextView"
+        android:layout_width="match_parent"
+        tools:text="취미 : "
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
