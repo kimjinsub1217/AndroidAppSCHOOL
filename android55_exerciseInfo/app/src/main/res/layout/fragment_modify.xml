@@ -1,14 +1,283 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FBDF8B"
     tools:context=".ModifyFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/textView1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:text="수정하기 전 정보"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="#FFC107"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/showBaseballLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/textView1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/baseballNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이름 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/battingAverageTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="타율 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/homeRunCountTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="홈런 수 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/safetyTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="안타 수 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/showSoccerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/textView1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/soccerNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이름 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/goalCountTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="득점 수 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/assistCountTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="어시스트 수 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/showSwimmingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView1">
+
+        <TextView
+            android:id="@+id/swimmingNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이름 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/swimmingTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="수영법 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="수정하기"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="300dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="#FFC107"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+    <!--  야구부  -->
+    <LinearLayout
+        android:id="@+id/baseballLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/baseballNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="이름을 입력하세요"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <EditText
+            android:id="@+id/battingAverageEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="타율을 입력하세요"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <EditText
+            android:id="@+id/homeRunCountEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="홈런수를 입력하세요"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <EditText
+            android:id="@+id/safetyEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="안타수를 입력하세요"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+    </LinearLayout>
+
+    <!--  축구  -->
+    <LinearLayout
+        android:id="@+id/soccerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/textView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/soccerNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="이름을 입력하세요"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <EditText
+            android:id="@+id/goalCountEditTExt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="골 넣은 갯수를 입력하세요"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <EditText
+            android:id="@+id/assistCountEditText"
+            android:layout_width="match_parent"
+            android:inputType="number"
+            android:layout_height="wrap_content"
+            android:hint="어시스트 갯수를 입력하세요"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+    </LinearLayout>
+
+    <!--  수영부  -->
+
+    <LinearLayout
+        android:id="@+id/swimmingLayout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/textView2"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/swimmingNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="이름을 입력하세요"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+        <TextView
+            android:id="@+id/swimmingLikeTextView"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:text="어떤 수영법을 잘하세요?" />
+        <Button
+            android:id="@+id/swimmingButton"
+            android:text="수영법을 선택하세요"
+            android:layout_width="wrap_content"
+            android:backgroundTint="#EC165F"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/modifyButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#2196F3"
+        android:text="수정완료"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/clearButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.35" />
+
+    <Button
+        android:id="@+id/clearButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#2196F3"
+        android:text="취소"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/modifyButton"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.35" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

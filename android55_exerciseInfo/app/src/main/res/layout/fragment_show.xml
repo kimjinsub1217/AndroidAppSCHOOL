@@ -1,14 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#8BC34A"
     tools:context=".ShowFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/showBaseballLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/baseballNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이름 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/battingAverageTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="타율 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/homeRunCountTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="홈런 수 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/safetyTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="안타 수 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/showSoccerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/soccerNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이름 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/goalCountTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="득점 수 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/assistCountTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="어시스트 수 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/showSwimmingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/swimmingNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이름 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/swimmingTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="수영법 : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/modifyButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#2196F3"
+        android:text="수정하기"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/clearButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.35" />
+
+    <Button
+        android:id="@+id/clearButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#2196F3"
+        android:text="지우기"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/modifyButton"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.35" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

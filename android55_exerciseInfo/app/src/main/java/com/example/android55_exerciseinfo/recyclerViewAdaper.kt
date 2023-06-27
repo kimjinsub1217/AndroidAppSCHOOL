@@ -18,6 +18,13 @@ class recyclerViewAdaper(private val mainActivity: MainActivity, private val typ
         var type: TextView = itemBinding.type
         var name: TextView = itemBinding.name
         var viewLine: View = itemBinding.viewLine
+
+        init {
+            itemBinding.root.setOnClickListener {
+                mainActivity.itemPosition = adapterPosition
+                mainActivity.replaceFragment(FragmentName.FRAGMENT_SHOW, true, true)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
