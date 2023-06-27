@@ -60,17 +60,16 @@ class InputFragment : Fragment() {
                     editTextInputUserAge.text.clear()
                     editTextInputUserKor.text.clear()
 
-                    val bundle = Bundle()
-                    bundle.putString("name", name)
-                    bundle.putInt("age", age)
-                    bundle.putInt("kor", kor)
-                    val receivingFragment = MainFragment()
-                    receivingFragment.arguments = bundle
 
-                    mainActivity.replaceFragment(FragmentName.FRAGMENT_MAIN,
-                        addToBackStack = true,
-                        animate = true
-                    )
+
+//                    내 코드
+//                    mainActivity.replaceFragment(FragmentName.FRAGMENT_MAIN,
+//                        addToBackStack = true,
+//                        animate = true
+//                    )
+
+//                  강사님 코드
+                    mainActivity.removeFragment(FragmentName.FRAGMENT_INPUT)
                     false
                 }
             }

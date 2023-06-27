@@ -1,4 +1,4 @@
-package com.example.android55_fragment
+package com.example.android55_zooinfo
 
 import android.R
 import android.view.LayoutInflater
@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android55_fragment.databinding.ItemInfoBinding
-import com.example.android55_fragment.infoList.dataList
+import com.example.android55_zooinfo.DataClass.Companion.animalList
+import com.example.android55_zooinfo.databinding.ItemInfoBinding
 
 
 class recyclerViewAdaper(private val mainActivity: MainActivity):RecyclerView.Adapter<recyclerViewAdaper.ViewHolderClass>() {
     inner class ViewHolderClass(itemBinding: ItemInfoBinding):RecyclerView.ViewHolder(itemBinding.root){
-        var nameText: TextView =itemBinding.nameTextView
-
+        var type: TextView =itemBinding.type
+        var name: TextView =itemBinding.name
         init{
             itemBinding.root.setOnClickListener {
 
@@ -37,10 +37,11 @@ class recyclerViewAdaper(private val mainActivity: MainActivity):RecyclerView.Ad
         return ViewHolderClass(binding)
     }
 
-    override fun getItemCount()=dataList.size
+    override fun getItemCount()=animalList.size
 
     override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
-        holder.nameText.text = "${dataList[position].name}"
+        holder.type.append(animalList[position].type)
+        holder.name.append(animalList[position].name)
 
     }
 }

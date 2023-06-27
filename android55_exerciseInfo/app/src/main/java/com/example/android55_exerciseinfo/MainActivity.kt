@@ -1,4 +1,4 @@
-package com.example.android55_fragment
+package com.example.android55_exerciseinfo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,17 +9,15 @@ import androidx.fragment.app.FragmentTransaction
 class MainActivity : AppCompatActivity() {
 
     // 터치한 항목의 순서값
-    var rowPosition = 0
+    var itemPosition = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // mainFragment를 보여준다.
-        replaceFragment(FragmentName.FRAGMENT_MAIN, false, false)
+        replaceFragment(FragmentName.FRAGMENT_MAIN, addToBackStack = false, animate = false)
     }
-
-    // 지정한 FRAGMENT를 보여주는 메서드
     fun replaceFragment(name: FragmentName, addToBackStack: Boolean, animate: Boolean) {
         // FRagment 교체 상태로 설정한다.
 
@@ -37,9 +35,15 @@ class MainActivity : AppCompatActivity() {
                 newFragment = InputFragment()
             }
 
-            FragmentName.FRAGMENT_RESULT -> {
-                newFragment = ResultFragment()
+            FragmentName.FRAGMENT_SHOW -> {
+                newFragment = ShowFragment()
             }
+
+            FragmentName.FRAGMENT_MODIFY -> {
+                newFragment = ModifyFragment()
+            }
+
+
         }
         if (newFragment != null) {
             fragmentTransaction.replace(R.id.mainContainer, newFragment!!)
@@ -58,7 +62,6 @@ class MainActivity : AppCompatActivity() {
             fragmentTransaction.commit()
         }
     }
-
     //Fragment를 BackStack에서 제거한다.
     fun removeFragment(name: FragmentName) {
         supportFragmentManager.popBackStack(name.str1, FragmentManager.POP_BACK_STACK_INCLUSIVE)
@@ -68,5 +71,6 @@ class MainActivity : AppCompatActivity() {
 enum class FragmentName(val str1: String) {
     FRAGMENT_MAIN("MainFragment"),
     FRAGMENT_INPUT("InputFragment"),
-    FRAGMENT_RESULT("ResultFragment")
+    FRAGMENT_SHOW("ShowFragment"),
+    FRAGMENT_MODIFY("ModifyFragment")
 }

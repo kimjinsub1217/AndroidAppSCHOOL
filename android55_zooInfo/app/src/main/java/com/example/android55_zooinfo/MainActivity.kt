@@ -1,4 +1,4 @@
-package com.example.android55_fragment
+package com.example.android55_zooinfo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,9 +16,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // mainFragment를 보여준다.
-        replaceFragment(FragmentName.FRAGMENT_MAIN, false, false)
+        replaceFragment(FragmentName.FRAGMENT_MAIN, addToBackStack = false, animate = false)
     }
-
     // 지정한 FRAGMENT를 보여주는 메서드
     fun replaceFragment(name: FragmentName, addToBackStack: Boolean, animate: Boolean) {
         // FRagment 교체 상태로 설정한다.
@@ -58,7 +57,6 @@ class MainActivity : AppCompatActivity() {
             fragmentTransaction.commit()
         }
     }
-
     //Fragment를 BackStack에서 제거한다.
     fun removeFragment(name: FragmentName) {
         supportFragmentManager.popBackStack(name.str1, FragmentManager.POP_BACK_STACK_INCLUSIVE)
