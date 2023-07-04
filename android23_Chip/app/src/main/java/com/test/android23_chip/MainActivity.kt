@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         binding.run {
             button1.run {
                 setOnClickListener {
