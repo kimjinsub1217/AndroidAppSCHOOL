@@ -5,31 +5,29 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android70_ex01.databinding.FragmentMainBinding
 import com.example.android70_ex01.databinding.RowMainBinding
+import com.example.android70_ex01.student.Companion.studentList
 
 class MainFragment : Fragment() {
 
-    lateinit var fragmentMainBinding: FragmentMainBinding
+    lateinit var fragmentMainBinding:FragmentMainBinding
     lateinit var mainActivity: MainActivity
-
-    // 학생의 정보를 담을 리스트
-    var studentList = mutableListOf<StudentClass>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         fragmentMainBinding = FragmentMainBinding.inflate(inflater)
         mainActivity = activity as MainActivity
 
-        fragmentMainBinding
-
-        fragmentMainBinding.run {
-            toolbarMain.run {
+        fragmentMainBinding.run{
+            toolbarMain.run{
                 title = "MainFragment"
                 inflateMenu(R.menu.main_menu)
                 setOnMenuItemClickListener {
@@ -38,29 +36,27 @@ class MainFragment : Fragment() {
                 }
             }
 
-            recyclerViewMain.run {
+            recyclerViewMain.run{
                 adapter = MainRecyclerViewAdapter()
                 layoutManager = LinearLayoutManager(mainActivity)
-                addItemDecoration(
-                    DividerItemDecoration(
-                        mainActivity,
-                        DividerItemDecoration.VERTICAL
-                    )
-                ) // 구분선
+                addItemDecoration(DividerItemDecoration(mainActivity, DividerItemDecoration.VERTICAL))
             }
 
         }
 
+
+        // Inflate the layout for this fragment
         return fragmentMainBinding.root
     }
 
-    inner class MainRecyclerViewAdapter :
-        RecyclerView.Adapter<MainRecyclerViewAdapter.MainViewHolderClass>() {
-        inner class MainViewHolderClass(rowMainBinding: RowMainBinding) :
-            RecyclerView.ViewHolder(rowMainBinding.root) {
-            var textViewRowMainName = rowMainBinding.textViewMainRowName
+    inner class MainRecyclerViewAdapter : RecyclerView.Adapter<MainRecyclerViewAdapter.MainViewHolderClass>(){
+
+        inner class MainViewHolderClass(rowMainBinding: RowMainBinding) : RecyclerView.ViewHolder(rowMainBinding.root){
+            var textViewMainRowName: TextView
 
             init {
+                textViewMainRowName = rowMainBinding.textViewMainRowName
+
                 rowMainBinding.root.setOnClickListener {
                     mainActivity.rowPosition = adapterPosition
                     mainActivity.replaceFragment(MainActivity.RESULT_FRAGMENT, true, true)
@@ -76,6 +72,7 @@ class MainFragment : Fragment() {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
+
             return mainViewHolderClass
         }
 
@@ -84,17 +81,21 @@ class MainFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: MainViewHolderClass, position: Int) {
-            holder.textViewRowMainName.text = studentList[position].name
+            holder.textViewMainRowName.text = studentList[position].nameData
         }
-
     }
 
     override fun onResume() {
         super.onResume()
 
+        // 기존의 데이터 비우기
+        studentList.clear()
+
         // 데이터를 불러온다.
-        val studentCount = mainActivity.getStudentCount()
-        studentList = mainActivity.getStudentInfo(studentCount)
+        val dataList = DAO.selectAllData(requireContext())
+        if(dataList.isNotEmpty()){
+            studentList +=dataList
+        }
 
         // 리사이클러뷰 갱신
         fragmentMainBinding.recyclerViewMain.adapter?.notifyDataSetChanged()

@@ -26,12 +26,6 @@ class MainActivity : AppCompatActivity() {
         val MAIN_FRAGMENT = "MainFragment";
         val ADD_FRAGMENT = "AddFragment"
         val RESULT_FRAGMENT = "ResultFragment"
-
-        // 학생수를 저장할 파일이름
-        val STUDENT_COUNT_FILE_NAME = "studentCount.dat"
-
-        // 학생 데이터를 저장할 파일 이름
-        val STUDENT_INFO_FILE_NAME = "studentInfo.dat"
     }
 
 
@@ -41,8 +35,6 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
 
-        // 상태바 색상 설정
-        getStudentCount()
         replaceFragment(MAIN_FRAGMENT, false, false)
     }
 
@@ -93,73 +85,8 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.popBackStack(name, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 
-    // 학생 수를 읽어와 반환하는 함수
-    fun getStudentCount(): Int {
-
-        // 내부 저장소에 파일이 있을 경우에만 불러온다.
-        val file = File("${filesDir?.path!!}/$STUDENT_COUNT_FILE_NAME")
-        if (file.exists() == true) {
-
-            val fis = openFileInput(STUDENT_COUNT_FILE_NAME)
-            val dis = DataInputStream(fis)
-
-            val count = dis.readInt()
-
-            dis.close()
-
-            return count
-        } else {
-            return 0
-        }
-    }
-
-    // 학생 수를 저장하는 메서드
-    fun writeStudentCount(count: Int) {
-        val fos = openFileOutput(STUDENT_COUNT_FILE_NAME, MODE_PRIVATE)
-        val dos = DataOutputStream(fos)
-        dos.writeInt(count)
-
-        dos.flush()
-        dos.close()
-    }
-
-    // 학생 데이터를 읽어오는 메서드
-    fun getStudentInfo(count: Int): MutableList<StudentClass> {
-        val studentList = mutableListOf<StudentClass>()
-
-        // 내부 저장소에 파일이 있을 경우에만 불러온다.
-        val file = File("${filesDir?.path!!}/$STUDENT_INFO_FILE_NAME")
-        if (file.exists()) {
-
-            val fis = openFileInput(STUDENT_INFO_FILE_NAME)
-            val ois = ObjectInputStream(fis)
-
-            for (idx in 0 until count) {
-                val obj = ois.readObject() as StudentClass
-                studentList.add(obj)
-            }
-            ois.close()
-        }
-        return studentList
-    }
-
-    // 학생 객체 저장
-    fun addStudentInfo(studentList:MutableList<StudentClass>){
-        // 파일을 연다.
-        val fos = openFileOutput(STUDENT_INFO_FILE_NAME, MODE_PRIVATE)
-        val oos = ObjectOutputStream(fos)
-
-        for(obj in studentList){
-            oos.writeObject(obj)
-        }
-
-        oos.flush()
-        oos.close()
-    }
 }
 
-//정보를 담을 객체
-data class StudentClass(var name: String, var age: Int, var korean: Int) : Serializable
 
 
 

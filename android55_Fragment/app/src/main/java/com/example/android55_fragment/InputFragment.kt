@@ -63,10 +63,10 @@ class InputFragment : Fragment() {
 
 
 //                    내 코드
-//                    mainActivity.replaceFragment(FragmentName.FRAGMENT_MAIN,
-//                        addToBackStack = true,
-//                        animate = true
-//                    )
+                    mainActivity.replaceFragment(FragmentName.FRAGMENT_MAIN,
+                        addToBackStack = true,
+                        animate = true
+                    )
 
 //                  강사님 코드
                     mainActivity.removeFragment(FragmentName.FRAGMENT_INPUT)

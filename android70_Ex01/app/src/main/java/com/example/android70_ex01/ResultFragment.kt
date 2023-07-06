@@ -30,14 +30,14 @@ class ResultFragment : Fragment() {
         mainActivity = activity as MainActivity
 
         // 파일로 부터 데이터를 가져온다.
-        val studentCount = mainActivity.getStudentCount()
-        val studentList = mainActivity.getStudentInfo(studentCount)
+
+        val studentList = DAO.selectData(requireContext(), mainActivity.rowPosition+1)
 
         // 선택한 행 번째의 객체에서 데이터를 가져와 출력한다.
-        fragmentResultBinding.run{
-            textViewResult1.text = studentList[mainActivity.rowPosition].name
-            textViewResult2.text = studentList[mainActivity.rowPosition].age.toString()
-            textViewResult3.text = studentList[mainActivity.rowPosition].korean.toString()
+        fragmentResultBinding.run {
+            textViewResult1.text = studentList.nameData
+            textViewResult2.text = studentList.ageData.toString()
+            textViewResult3.text = studentList.koreanData.toString()
         }
 
         return fragmentResultBinding.root
