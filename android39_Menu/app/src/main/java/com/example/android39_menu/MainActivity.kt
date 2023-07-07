@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
             // textView에 컨텍스트 메뉴를 등록한다.
             registerForContextMenu(textView)
+
             button.run {
                 setOnClickListener {
                     val pop = PopupMenu(this@MainActivity, textView)

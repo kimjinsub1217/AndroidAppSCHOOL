@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android70_ex01.student.Companion.memoList
 import com.example.android70_ex02.databinding.FragmentMainBinding
+import com.example.android70_ex03.DB.DAO
 
 class MainFragment : Fragment() {
 
@@ -52,11 +53,7 @@ class MainFragment : Fragment() {
                     )
                 )
             }
-
         }
-
-
-        // Inflate the layout for this fragment
         return fragmentMainBinding.root
     }
 

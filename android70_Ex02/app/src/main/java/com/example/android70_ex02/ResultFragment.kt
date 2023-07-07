@@ -4,24 +4,15 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.os.Parcelable
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
-import com.example.android70_ex01.MemoClass
-import com.example.android70_ex01.student
 import com.example.android70_ex01.student.Companion.memoList
-import com.example.android70_ex02.databinding.FragmentMainBinding
 import com.example.android70_ex02.databinding.FragmentResultBinding
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import com.example.android70_ex03.DB.DAO
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

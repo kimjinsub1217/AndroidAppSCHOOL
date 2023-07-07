@@ -1,4 +1,4 @@
-package com.example.android70_ex02
+package com.example.android70_ex03.DB
 
 import android.content.Context
 import com.example.android70_ex01.MemoClass
