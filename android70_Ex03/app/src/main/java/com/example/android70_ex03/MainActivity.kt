@@ -10,14 +10,16 @@ import com.example.android70_ex03.fragment.CategoryListFragment
 import com.example.android70_ex03.fragment.LoginFragment
 import com.example.android70_ex03.fragment.MemoAddFragment
 import com.example.android70_ex03.fragment.MemoListFragment
+import com.example.android70_ex03.fragment.MemoModifyFragment
+import com.example.android70_ex03.fragment.MemoViewContentFragment
 import com.example.android70_ex03.fragment.PasswordSettingFragment
 
 class MainActivity : AppCompatActivity() {
     lateinit var activityMainBinding: ActivityMainBinding
 
     // 사용자가 누른 항목 번호
-    var rowPosition = 0
-    var CategoryPosition = 0
+    var categoryPosition = 0
+    var memoPosition = 0
 
     // Activit가 관리할 프래그먼트들의 이름
     companion object {
@@ -27,7 +29,8 @@ class MainActivity : AppCompatActivity() {
         val CATEGORY_LIST_FRAGMENT = "CategoryListFragment"
         var MEMO_LIST_FRAGMENT = "MemoListFragment"
         val MEMO_ADD_FRAGMENT = "MemoAddFragment"
-
+        val MEMO_VIEW_CONTENT_FRAGMENT = "MemoViewContentFragment"
+        val MEMO_MODIFY_FRAGMENT = "MemoModifyFragment"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +68,13 @@ class MainActivity : AppCompatActivity() {
                 MemoAddFragment()
             }
 
+            MEMO_VIEW_CONTENT_FRAGMENT -> {
+                MemoViewContentFragment()
+            }
+
+            MEMO_MODIFY_FRAGMENT -> {
+                MemoModifyFragment()
+            }
 
             else -> {
                 Fragment()

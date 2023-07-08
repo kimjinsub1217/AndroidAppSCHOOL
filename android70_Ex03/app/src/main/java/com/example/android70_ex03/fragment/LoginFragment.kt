@@ -22,8 +22,6 @@ class LoginFragment : Fragment() {
         fragmentLoginBinding = FragmentLoginBinding.inflate(inflater)
         mainActivity = activity as MainActivity
 
-
-
         fragmentLoginBinding.run {
             settingCompleteButton.setOnClickListener {
                 val loginPassword = loginPasswordEditText.text.toString()

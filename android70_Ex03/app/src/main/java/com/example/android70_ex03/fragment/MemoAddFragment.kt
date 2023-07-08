@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import com.example.android70_ex03.MainActivity
 import com.example.android70_ex03.R
 import com.example.android70_ex03.databinding.FragmentMemoAddBinding
-import com.example.android70_ex03.db.Category
 import com.example.android70_ex03.db.Category.Companion.categoryList
 import com.example.android70_ex03.db.DAOCategory
 import com.example.android70_ex03.db.DAOMemo
@@ -20,7 +19,6 @@ import com.example.android70_ex03.db.MemoClass
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import kotlin.math.log
 
 
 class MemoAddFragment : Fragment() {
@@ -68,15 +66,11 @@ class MemoAddFragment : Fragment() {
 
 
                             val obj =
-                                DAOCategory.selectData(mainActivity, mainActivity.rowPosition + 1)
-                            Log.i("메모 추가", obj.toString())
+                                DAOCategory.selectData(mainActivity, mainActivity.categoryPosition + 1)
 
-                            val memoClass = MemoClass(0, memoTitle, memoContent, now,mainActivity.rowPosition + 1)
+                            val memoClass = MemoClass(0, memoTitle, memoContent, now,mainActivity.categoryPosition + 1)
                             DAOMemo.insertData(requireContext(), memoClass)
-                            Log.i("확인한다ㅎㅎㅎㅎㅎ.",memoClass.toString())
-                            Log.i("확인한다.", mainActivity.rowPosition.toString())
-                            Log.i("확인한다.",  categoryList[mainActivity.rowPosition].memoList.toString())
-                            categoryList[mainActivity.rowPosition].memoList.add(memoClass)
+                            categoryList[mainActivity.categoryPosition].memoList.add(memoClass)
                             obj!!.memoList.add(memoClass)
                             DAOCategory.updateData(mainActivity, obj)
 

@@ -19,6 +19,8 @@ import com.example.android70_ex03.R
 import com.example.android70_ex03.databinding.DialogBinding
 import com.example.android70_ex03.databinding.RowCategoryBinding
 import com.example.android70_ex03.db.Category.Companion.categoryList
+import com.example.android70_ex03.db.DAOMemo
+import com.example.android70_ex03.db.Memo.Companion.memoList
 import kotlin.concurrent.thread
 
 class CategoryAdapter(private val mainActivity: MainActivity) :
@@ -30,8 +32,7 @@ class CategoryAdapter(private val mainActivity: MainActivity) :
         init {
             itemView.setOnCreateContextMenuListener(this)
             rowCategoryBinding.root.setOnClickListener {
-                mainActivity.rowPosition = adapterPosition
-                mainActivity.CategoryPosition = adapterPosition
+                mainActivity.categoryPosition = adapterPosition
                 mainActivity.replaceFragment(MainActivity.MEMO_LIST_FRAGMENT, true, true)
             }
         }
@@ -84,20 +85,39 @@ class CategoryAdapter(private val mainActivity: MainActivity) :
             menu?.findItem(R.id.category_list_context_delete_button)?.setOnMenuItemClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
+
+                    // 메모
+                    val removedMemos = memoList.filter { it.categoryData == position + 1 }
+                    memoList.removeAll(removedMemos)
+
+                    for (removedMemo in removedMemos) {
+                        DAOMemo.deleteData(mainActivity, removedMemo.idx)
+                    }
+
+                    for (i in position until memoList.size) {
+                        val memo = memoList[i]
+                        memo.categoryData = memo.categoryData - 1
+                        DAOMemo.updateData(mainActivity, memo)
+                    }
+
+                    memoList = DAOMemo.selectAllData(mainActivity)
+
+                    val obj = DAOMemo.selectAllData(mainActivity)
+                    Log.i("오늘도 확인1", memoList.toString())
+                    Log.i("오늘도 확인2", obj.toString())
+
+                    // 카테고리
+                    val deletedItem = categoryList[position]
+                    val deletedId = deletedItem.idx
+
                     categoryList.removeAt(position)
-
-                    val deletedPosition = position - 1
-                    val deletedItem = categoryList[deletedPosition]
-                    val deletedId = deletedItem.idx // 삭제되는 항목의 ID 저장
-
                     DAOCategory.deleteData(mainActivity, deletedId)
 
-                    // 삭제된 이후의 모든 아이템의 인덱스 업데이트
-                    for (i in deletedPosition until categoryList.size) {
+                    for (i in position until categoryList.size) {
                         categoryList[i].idx = categoryList[i].idx - 1
                     }
-                    // 데이터베이스에 추가한 데이터 다시 삽입
-                    DAOCategory.deleteAllData(mainActivity) // 기존 데이터 모두 삭제
+
+                    DAOCategory.deleteAllData(mainActivity)
                     for (item in categoryList) {
                         DAOCategory.insertData(mainActivity, item)
                     }

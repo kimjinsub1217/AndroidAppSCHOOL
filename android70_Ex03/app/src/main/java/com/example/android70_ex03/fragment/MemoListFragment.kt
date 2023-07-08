@@ -9,13 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android70_ex03.MainActivity
 import com.example.android70_ex03.R
 import com.example.android70_ex03.adapter.MemoAdapter
 import com.example.android70_ex03.databinding.FragmentMemoListBinding
-import com.example.android70_ex03.db.Category.Companion.categoryList
 import com.example.android70_ex03.db.DAOCategory
 import com.example.android70_ex03.db.DAOMemo
 import com.example.android70_ex03.db.Memo.Companion.memoList
@@ -33,7 +31,7 @@ class MemoListFragment : Fragment() {
 
         fragmentMemoListBinding.run {
             memoListToolbar.run {
-                val obj = DAOCategory.selectData(requireContext(), mainActivity.rowPosition + 1)
+                val obj = DAOCategory.selectData(requireContext(), mainActivity.categoryPosition + 1)
                 Log.i("memoListFragment 값", obj.toString())
                 title = "${obj?.titleData}"
                 inflateMenu(R.menu.memo_list_menu)
@@ -69,12 +67,6 @@ class MemoListFragment : Fragment() {
                     reverseLayout = true
                     stackFromEnd = true
                 }
-                addItemDecoration(
-                    DividerItemDecoration(
-                        mainActivity,
-                        DividerItemDecoration.VERTICAL
-                    )
-                )
             }
 
         }
