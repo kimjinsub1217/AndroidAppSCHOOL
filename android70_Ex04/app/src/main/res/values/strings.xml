@@ -1,7 +1,23 @@
 <resources>
-    <string name="app_name">android70_Ex04</string>
+    <string name="app_name">맥주 </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login">로그인</string>
     <string name="signUp">회원가입</string>
+    <string name="name">Name</string>
+    <string name="complete">완료</string>
+    <string name="username">userName</string>
+    <string name="verification_code">인증번호</string>
+    <string name="home">홈</string>
+    <string name="search">검색</string>
+    <string name="favorite">하트</string>
+    <string name="cart">장바구니</string>
+    <string name="mypage">마이페이지</string>
+
+    <string name="asahi">아사히 맥주</string>
+    <string name="cass">카스 맥주</string>
+    <string name="terra">테라 맥주</string>
+
+    <string name="open_drawer">Open Drawer</string>
+    <string name="close_drawer">Close Drawer</string>
 </resources>

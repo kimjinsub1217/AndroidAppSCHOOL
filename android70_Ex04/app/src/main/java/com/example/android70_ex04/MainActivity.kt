@@ -2,8 +2,6 @@ package com.example.android70_ex04
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -18,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         val MAIN_FRAGMENT = "MainFragment"
         val SIGN_UP_FRAGMENT="SignUpFragment"
         val LOGIN_FRAGMENT="LoginFragment"
+        val HOME_SCREAN_FRAGMENT="HomeScreanFragment"
 
     }
 
@@ -47,6 +46,9 @@ class MainActivity : AppCompatActivity() {
 
             SIGN_UP_FRAGMENT->{
                 SignUpFragment()
+            }
+            HOME_SCREAN_FRAGMENT->{
+                HomeScreenFragment()
             }
 
             else -> {

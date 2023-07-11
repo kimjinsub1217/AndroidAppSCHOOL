@@ -55,4 +55,12 @@ dependencies {
 
     // TextShimmer
     implementation 'com.romainpiel.shimmer:library:1.4.0@aar'
+
+    // lifecycle
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+
+    // navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
 }

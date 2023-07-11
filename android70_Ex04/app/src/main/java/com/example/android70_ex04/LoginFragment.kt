@@ -5,27 +5,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.example.android70_ex04.databinding.FragmentLoginBinding
 
 
 class LoginFragment : Fragment() {
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
+    lateinit var fragmentLoginBinding: FragmentLoginBinding
+    lateinit var mainActivity: MainActivity
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        fragmentLoginBinding = FragmentLoginBinding.inflate(inflater)
+        mainActivity = activity as MainActivity
+
+        fragmentLoginBinding.run {
+            completeButton.setOnClickListener {
+                mainActivity.replaceFragment(
+                    MainActivity.HOME_SCREAN_FRAGMENT,
+                    addToBackStack = true,
+                    animate = true
+                )
+            }
+        }
+
+        return fragmentLoginBinding.root
     }
 
 }

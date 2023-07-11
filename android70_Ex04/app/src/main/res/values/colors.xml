@@ -3,5 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="soft_black">#2B2730</color>
-    <color name="logo_color">#ffac33</color>
+    <color name="logo_color">#ffcc4d</color>
+    <color name="logo_orange">#f4900c</color>
+    <color name="login_background">#2A2F4F</color>
 </resources>

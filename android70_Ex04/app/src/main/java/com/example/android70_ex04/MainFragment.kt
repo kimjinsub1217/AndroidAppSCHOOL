@@ -23,6 +23,15 @@ class MainFragment : Fragment() {
 
             }
 
+            loginButton.setOnClickListener {
+                mainActivity.replaceFragment(
+                    MainActivity.LOGIN_FRAGMENT,
+                    addToBackStack = true,
+                    animate = true
+                )
+            }
+
+
             signUpButton.setOnClickListener {
                 mainActivity.replaceFragment(
                     MainActivity.SIGN_UP_FRAGMENT,
