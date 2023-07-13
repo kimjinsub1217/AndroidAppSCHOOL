@@ -33,7 +33,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <TextView
-                android:id="@+id/textViewMeMoSubject"
+                android:id="@+id/textViewMemoSubject"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="제목입니다."
