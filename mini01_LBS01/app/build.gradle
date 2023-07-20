@@ -3,10 +3,17 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
+// Properties 객체 생성
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
     namespace 'com.example.mini01_lbs01'
     compileSdk 33
+
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
         applicationId "com.example.mini01_lbs01"
@@ -16,6 +23,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "MAPS_API_KEY2", properties['MAPS_API_KEY2']
     }
 
     buildTypes {
@@ -52,4 +61,8 @@ dependencies {
     // google Map
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation 'com.google.android.libraries.places:places:3.2.0'
+
+    implementation "com.squareup.okhttp3:okhttp:4.10.0"
+    implementation 'com.google.code.gson:gson:2.9.0'
 }
