@@ -23,8 +23,8 @@ class AddUserInfoFragment : Fragment() {
 
         fragmentAddUserInfoBinding.run {
             toolbarUserInfo.run {
-                title = "유저정보"
-                setTitleTextColor(Color.WHITE)
+                title = "회원가입"
+
                 setNavigationIcon(androidx.appcompat.R.drawable.abc_ic_ab_back_material)
                 setNavigationOnClickListener {
                     mainActivity.removeFragment(MainActivity.JOIN_FRAGMENT)
@@ -33,7 +33,8 @@ class AddUserInfoFragment : Fragment() {
             }
 
             completeButton.setOnClickListener {
-                mainActivity.replaceFragment(MainActivity.LOGIN_FRAGMENT, true, null)
+                mainActivity.removeFragment(MainActivity.ADD_USER_INFO_FRAGMENT)
+                mainActivity.removeFragment(MainActivity.JOIN_FRAGMENT)
             }
             return fragmentAddUserInfoBinding.root
         }

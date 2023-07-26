@@ -8,13 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnticipateInterpolator
-import androidx.core.animation.addListener
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.mini02_boardproject01.databinding.ActivityMainBinding
-import com.google.android.material.transition.MaterialArcMotion
 import com.google.android.material.transition.MaterialSharedAxis
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         val LOGIN_FRAGMENT = "LoginFragment"
         val JOIN_FRAGMENT = "JoinFragment"
         val ADD_USER_INFO_FRAGMENT = "AddUserInfoFragment"
+        val HOME_FRAGMENT="HomeFragment"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,6 +95,7 @@ class MainActivity : AppCompatActivity() {
             LOGIN_FRAGMENT -> LoginFragment()
             JOIN_FRAGMENT -> JoinFragment()
             ADD_USER_INFO_FRAGMENT->AddUserInfoFragment()
+            HOME_FRAGMENT->HomeFragment()
             else -> Fragment()
         }
 

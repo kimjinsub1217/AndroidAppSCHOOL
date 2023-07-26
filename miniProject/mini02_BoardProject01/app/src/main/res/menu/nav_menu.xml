@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/main_item"
+        android:title="게시판">
+        <menu>
+            <item
+                android:id="@+id/allBoard"
+                android:title="전체게시판"
+                android:checkable="true"/>
+            <item
+                android:id="@+id/freeBoard"
+                android:title="자유게시판"
+                android:checkable="true"/>
+            <item
+                android:id="@+id/humorBoard"
+                android:title="유머게시판"
+                android:checkable="true"/>
+
+            <item
+                android:id="@+id/questionBoard"
+                android:title="질문게시판"
+                android:checkable="true"/>
+
+            <item
+                android:id="@+id/sportsBoard"
+                android:title="스포츠게시판"
+                android:checkable="true"/>
+        </menu>
+
+    </item>
+            <item
+                android:id="@+id/item_board_main_user_info"
+                android:icon="@drawable/remember_me"
+                android:title="사용자 정보 수정"
+                app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/logout"
+                android:title="로그아웃"
+                android:checkable="true"
+                app:showAsAction="ifRoom"/>
+
+            <item
+                android:id="@+id/Withdrawal"
+                android:icon="@drawable/manage_accounts"
+                android:title="회원탈퇴"
+                android:checkable="true"
+                app:showAsAction="ifRoom"/>
+</menu>
