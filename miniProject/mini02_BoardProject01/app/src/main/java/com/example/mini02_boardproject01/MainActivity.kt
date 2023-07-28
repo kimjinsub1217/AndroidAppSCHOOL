@@ -19,14 +19,17 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var activityMainBinding: ActivityMainBinding
 
-    var newFragment:Fragment? = null
-    var oldFragment:Fragment? = null
+    var newFragment: Fragment? = null
+    var oldFragment: Fragment? = null
 
     companion object {
         val LOGIN_FRAGMENT = "LoginFragment"
         val JOIN_FRAGMENT = "JoinFragment"
         val ADD_USER_INFO_FRAGMENT = "AddUserInfoFragment"
-        val HOME_FRAGMENT="HomeFragment"
+        val HOME_FRAGMENT = "HomeFragment"
+        val POST_WRITE_FRAGMENT = "PostWriteFragment"
+        val POST_READ_FRAGMENT = "PostReadFragment"
+        val POST_MODIFY_FRAGMENT = "PostModifyFragment"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,16 +89,19 @@ class MainActivity : AppCompatActivity() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
 
         // newFragment 에 Fragment가 들어있으면 oldFragment에 넣어준다.
-        if(newFragment != null){
+        if (newFragment != null) {
             oldFragment = newFragment
         }
 
         // 새로운 Fragment를 담을 변수
-        newFragment = when(name){
+        newFragment = when (name) {
             LOGIN_FRAGMENT -> LoginFragment()
             JOIN_FRAGMENT -> JoinFragment()
-            ADD_USER_INFO_FRAGMENT->AddUserInfoFragment()
-            HOME_FRAGMENT->HomeFragment()
+            ADD_USER_INFO_FRAGMENT -> AddUserInfoFragment()
+            HOME_FRAGMENT -> HomeFragment()
+            POST_WRITE_FRAGMENT -> PostWriteFragment()
+            POST_READ_FRAGMENT -> PostReadFragment()
+            POST_MODIFY_FRAGMENT -> PostModifyFragment()
             else -> Fragment()
         }
 
@@ -113,7 +119,7 @@ class MainActivity : AppCompatActivity() {
 
 
             // 애니메이션 설정
-            if(oldFragment != null){
+            if (oldFragment != null) {
                 oldFragment?.exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
                 oldFragment?.reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
                 oldFragment?.enterTransition = null

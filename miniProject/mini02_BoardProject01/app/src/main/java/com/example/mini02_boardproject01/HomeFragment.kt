@@ -29,6 +29,7 @@ class HomeFragment : Fragment() {
     var newFragment: Fragment? = null
     var oldFragment: Fragment? = null
     lateinit var homeToolbar: MaterialToolbar
+
     companion object {
         val POST_LIST_FRAGMENT = "PostListFragment"
         val MODIFY_USER_FRAGMENT = "ModifyUserFragment"
@@ -47,9 +48,9 @@ class HomeFragment : Fragment() {
         mainActivity = activity as MainActivity
 
         fragmentHomeBinding.run {
-            homeToolbar =toolbarHome
+            homeToolbar = toolbarHome
             toolbarHome.run {
-                title = "홈"
+                title = "게시판"
                 setNavigationIcon(R.drawable.menu)
                 setNavigationOnClickListener {
                     drawerLayout.open()
@@ -62,37 +63,35 @@ class HomeFragment : Fragment() {
                 when (menuItem.itemId) {
                     // 전체 게시판
                     R.id.allBoard -> {
-                        replaceFragment(POST_LIST_FRAGMENT, false, null)
+                        replaceFragment(POST_LIST_FRAGMENT, false, false, null)
                     }
                     // 자유 게시판
                     R.id.freeBoard -> {
-                        replaceFragment(POST_LIST_FRAGMENT, false, null)
+                        replaceFragment(POST_LIST_FRAGMENT, false, false, null)
                     }
                     // 유머 게시판
                     R.id.humorBoard -> {
-                        replaceFragment(POST_LIST_FRAGMENT, false, null)
+                        replaceFragment(POST_LIST_FRAGMENT, false, false, null)
                     }
                     // 질문 게시판
                     R.id.questionBoard -> {
-                        replaceFragment(POST_LIST_FRAGMENT, false, null)
+                        replaceFragment(POST_LIST_FRAGMENT, false, false, null)
                     }
                     // 스포츠 게시판
                     R.id.sportsBoard -> {
-                        replaceFragment(POST_LIST_FRAGMENT, false, null)
+                        replaceFragment(POST_LIST_FRAGMENT, false, false, null)
                     }
                     // 사용자 정보 수정
                     R.id.item_board_main_user_info -> {
-                        replaceFragment(MODIFY_USER_FRAGMENT, false, null)
+                        replaceFragment(MODIFY_USER_FRAGMENT, false, false, null)
                     }
                     // 로그아웃
                     R.id.logout -> {
-                        val intent = Intent(requireContext(), MainActivity::class.java)
-                        startActivity(intent)
+                        mainActivity.replaceFragment(MainActivity.LOGIN_FRAGMENT, false, null)
                     }
                     // 회원탈퇴
                     R.id.Withdrawal -> {
-                        val intent = Intent(requireActivity(), MainActivity::class.java)
-                        startActivity(intent)
+                        mainActivity.replaceFragment(MainActivity.LOGIN_FRAGMENT, false, null)
                     }
                 }
 
@@ -101,7 +100,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        replaceFragment(POST_LIST_FRAGMENT, true, null)
+        replaceFragment(POST_LIST_FRAGMENT, true, false, null)
         return fragmentHomeBinding.root
     }
 
@@ -144,7 +143,7 @@ class HomeFragment : Fragment() {
     }
 
     // 지정한 Fragment를 보여주는 메서드
-    fun replaceFragment(name: String, addToBackStack: Boolean, bundle: Bundle?) {
+    fun replaceFragment(name: String, addToBackStack: Boolean, animate: Boolean, bundle: Bundle?) {
         // Fragment 교체 상태로 설정한다.
         val fragmentTransaction = childFragmentManager.beginTransaction()
 
@@ -167,27 +166,33 @@ class HomeFragment : Fragment() {
 
         if (newFragment != null) {
 
-            // oldFragment -> newFragment로 이동
-            // oldFramgent : exit
-            // newFragment : enter
 
-            // oldFragment <- newFragment 로 되돌아가기
-            // oldFragment : reenter
-            // newFragment : return
+            if (animate == true) {
+                // 애니메이션 설정
+                if (oldFragment != null) {
+                    oldFragment?.exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
+                    oldFragment?.reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
+                    oldFragment?.enterTransition = null
+                    oldFragment?.returnTransition = null
+                }
 
+                newFragment?.exitTransition = null
+                newFragment?.reenterTransition = null
+                newFragment?.enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
+                newFragment?.returnTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
+            } else {
+                if (oldFragment != null) {
+                    oldFragment?.exitTransition = null
+                    oldFragment?.reenterTransition = null
+                    oldFragment?.enterTransition = null
+                    oldFragment?.returnTransition = null
+                }
 
-            // 애니메이션 설정
-            if (oldFragment != null) {
-                oldFragment?.exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
-                oldFragment?.reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
-                oldFragment?.enterTransition = null
-                oldFragment?.returnTransition = null
+                newFragment?.exitTransition = null
+                newFragment?.reenterTransition = null
+                newFragment?.enterTransition = null
+                newFragment?.returnTransition = null
             }
-
-            newFragment?.exitTransition = null
-            newFragment?.reenterTransition = null
-            newFragment?.enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
-            newFragment?.returnTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
 
             // Fragment를 교채한다.
             fragmentTransaction.replace(R.id.homeContainer, newFragment!!)

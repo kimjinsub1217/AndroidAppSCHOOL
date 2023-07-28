@@ -11,13 +11,14 @@
     <!-- NestedScrollingChild goes here (NestedScrollView, RecyclerView, etc.). -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         app:layout_behavior="@string/searchbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
 
     </androidx.core.widget.NestedScrollView>
 
@@ -28,7 +29,7 @@
         <com.google.android.material.search.SearchBar
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:hint="@string/searchbar_hint" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -39,6 +40,11 @@
         android:hint="@string/searchbar_hint"
         app:layout_anchor="@id/search_bar"
         app:layout_anchorGravity="bottom">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewPostListResult"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </com.google.android.material.search.SearchView>
 

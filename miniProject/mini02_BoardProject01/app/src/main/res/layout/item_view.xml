@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/itemName"
@@ -11,8 +13,18 @@
         android:layout_marginTop="20dp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        tools:text="우산"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="우산" />
+
+    <TextView
+        android:id="@+id/rowPostListNickName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        tools:text="비" />
 
 </LinearLayout>

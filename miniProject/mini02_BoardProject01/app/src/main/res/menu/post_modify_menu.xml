@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/photoCameraModify"
+        android:icon="@drawable/photo_camera"
+        android:title="사진촬영"
+        android:checkable="true"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/photoLibraryModify"
+        android:icon="@drawable/photo_library"
+        android:title="앨범에서 가져오기"
+        android:checkable="true"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/doneModify"
+        android:icon="@drawable/done"
+        android:title="작성완료 "
+        android:checkable="true"
+        app:showAsAction="ifRoom"/>
+</menu>
