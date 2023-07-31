@@ -1,6 +1,7 @@
 package com.example.mini02_boardproject01
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.os.SystemClock
 import android.text.TextUtils
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.example.mini02_boardproject01.databinding.FragmentPostWriteBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlin.concurrent.thread
 
 class PostWriteFragment : Fragment() {
@@ -37,11 +39,37 @@ class PostWriteFragment : Fragment() {
                 setOnMenuItemClickListener {
                     when (it.itemId) {
                         R.id.done -> {
-                            val userId = textInputEditTextPostWriteTitle.text
-                            val userPassword = textInputEditTextPostWriteDetail.text
 
-                            val userIdError = if (TextUtils.isEmpty(userId)) "이름을 입력해주세요." else null
-                            val userPasswordError = if (TextUtils.isEmpty(userPassword)) "비밀번호를 입력해주세요." else null
+                            val subject = textInputEditTextPostWriteTitle.text.toString()
+                            val text= textInputEditTextPostWriteDetail.text.toString()
+
+                            if(subject.isEmpty()){
+                                val builder = MaterialAlertDialogBuilder(mainActivity)
+                                builder.setTitle("제목 입력 오류")
+                                builder.setMessage("제목을 입력해주세요")
+                                builder.setPositiveButton("확인"){ dialogInterface: DialogInterface, i: Int ->
+                                    mainActivity.showSoftInput(textInputEditTextPostWriteTitle)
+                                }
+                                builder.show()
+                                return@setOnMenuItemClickListener true
+                            }
+
+                            if(text.isEmpty()){
+                                val builder = MaterialAlertDialogBuilder(mainActivity)
+                                builder.setTitle("내용 입력 오류")
+                                builder.setMessage("내용를 입력해주세요")
+                                builder.setPositiveButton("확인"){ dialogInterface: DialogInterface, i: Int ->
+                                    mainActivity.showSoftInput(textInputEditTextPostWriteDetail)
+                                }
+                                builder.show()
+                                return@setOnMenuItemClickListener true
+                            }
+
+                            val userName = textInputEditTextPostWriteTitle.text
+                            val userDetail = textInputEditTextPostWriteDetail.text
+
+                            val userIdError = if (TextUtils.isEmpty(userName)) "이름을 입력해주세요." else null
+                            val userPasswordError = if (TextUtils.isEmpty(userDetail)) "내용을 입력해주세요." else null
 
                             textInputLayoutPostWriteTitle.error = userIdError
                             textInputLayoutPostWriteDetail.error = userPasswordError
@@ -50,6 +78,7 @@ class PostWriteFragment : Fragment() {
                                 mainActivity.removeFragment(MainActivity.POST_WRITE_FRAGMENT)
                             }
                         }
+
                     }
                     false
                 }

@@ -2,6 +2,7 @@ package com.example.mini02_boardproject01
 
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -16,7 +17,9 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import com.example.mini02_boardproject01.databinding.FragmentJoinBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.database.FirebaseDatabase
 import kotlin.concurrent.thread
 
 
@@ -31,6 +34,8 @@ class JoinFragment : Fragment() {
         mainActivity = activity as MainActivity
 
         fragmentJoinBinding.run {
+
+
             toolbarJoin.run {
                 title = "회원가입"
 
@@ -78,11 +83,58 @@ class JoinFragment : Fragment() {
                     textInputEditTextJoinUserPassword.error = userPasswordError
                     textInputEditTextJoinUserRePassword.error = userRePasswordError
 
+                    if (userId.toString().isEmpty()) {
+                        val builder = MaterialAlertDialogBuilder(mainActivity)
+                        builder.setTitle("로그인 오류")
+                        builder.setMessage("아이디를 입력해주세요")
+                        builder.setPositiveButton("확인") { dialogInterface: DialogInterface, i: Int ->
+                            mainActivity.showSoftInput(textInputEditTextJoinUserId)
+                        }
+                        builder.show()
+                    }
+
+                    if (userPassword.toString().isEmpty()) {
+                        val builder = MaterialAlertDialogBuilder(mainActivity)
+                        builder.setTitle("비밀번호 오류")
+                        builder.setMessage("비빈번호를 입력해주세요")
+                        builder.setPositiveButton("확인") { dialogInterface: DialogInterface, i: Int ->
+                            mainActivity.showSoftInput(textInputEditTextJoinUserPassword)
+                        }
+                        builder.show()
+                    }
+
+                    if (userRePassword.toString().isEmpty()) {
+                        val builder = MaterialAlertDialogBuilder(mainActivity)
+                        builder.setTitle("비밀번호 오류")
+                        builder.setMessage("비빈번호를 입력해주세요")
+                        builder.setPositiveButton("확인") { dialogInterface: DialogInterface, i: Int ->
+                            mainActivity.showSoftInput(textInputEditTextJoinUserRePassword)
+                        }
+                        builder.show()
+                    }
+
+                    if (userPassword.toString() != userRePassword.toString()) {
+                        val builder = MaterialAlertDialogBuilder(mainActivity)
+                        builder.setTitle("비빌번호 오류")
+                        builder.setMessage("비밀번호가 일치하지 않습니다.")
+                        builder.setPositiveButton("확인") { dialogInterface: DialogInterface, i: Int ->
+                            textInputEditTextJoinUserPassword.setText("")
+                            textInputEditTextJoinUserRePassword.setText("")
+                            mainActivity.showSoftInput(textInputEditTextJoinUserPassword)
+                        }
+                        builder.show()
+                    }
+
+
                     if (userIdError == null && userPasswordError == null) {
+                        val newBundle = Bundle()
+                        newBundle.putString("joinUserId", userId.toString())
+                        newBundle.putString("joinUserPw", userPassword.toString())
+
                         mainActivity.replaceFragment(
                             MainActivity.ADD_USER_INFO_FRAGMENT,
                             true,
-                            null
+                            newBundle
                         )
                     }
                 }
@@ -117,6 +169,8 @@ class JoinFragment : Fragment() {
                         textInputEditTextJoinUserRePassword.error = userRePasswordError
 
                         if (userIdError == null && userPasswordError == null) {
+
+
                             mainActivity.replaceFragment(
                                 MainActivity.ADD_USER_INFO_FRAGMENT,
                                 true,

@@ -1,5 +1,6 @@
 package com.example.mini02_boardproject01
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -9,11 +10,13 @@ import android.view.ViewGroup
 import com.example.mini02_boardproject01.HomeFragment.Companion.MODIFY_USER_ADDITIONAL_FRAGMENT
 import com.example.mini02_boardproject01.HomeFragment.Companion.MODIFY_USER_BASIC_FRAGMENT
 import com.example.mini02_boardproject01.databinding.FragmentModifyUserBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ModifyUserFragment : Fragment() {
 
     lateinit var fragmentModifyUserBinding: FragmentModifyUserBinding
     lateinit var homeFragment: HomeFragment
+    lateinit var mainActivity: MainActivity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,7 +24,7 @@ class ModifyUserFragment : Fragment() {
     ): View? {
         fragmentModifyUserBinding = FragmentModifyUserBinding.inflate(inflater)
         homeFragment = requireParentFragment() as HomeFragment
-
+        mainActivity = activity as MainActivity
         fragmentModifyUserBinding.run {
 
 //            existingUserInfoButton.setOnClickListener {
@@ -35,11 +38,51 @@ class ModifyUserFragment : Fragment() {
             ModifyCompleteButton.setOnClickListener {
                 val password = textInputEditTextModifyUserPw.text.toString()
                 val rePassword = textInputEditTextModifyUserPw2.text.toString()
+                val modifyUserNickName = textInputEditTextModifyUserNickName.text.toString()
+                val modifyUserAge = textInputEditTextModifyUserAge.text.toString()
+
+                if(password.isNotEmpty() || rePassword.isNotEmpty()){
+                    if(password != rePassword){
+                        val builder = MaterialAlertDialogBuilder(mainActivity)
+                        builder.setTitle("비빌번호 오류")
+                        builder.setMessage("비밀번호가 다릅니다.")
+                        builder.setPositiveButton("확인"){ dialogInterface: DialogInterface, i: Int ->
+                            textInputEditTextModifyUserPw.setText("")
+                            textInputEditTextModifyUserPw2.setText("")
+                            mainActivity.showSoftInput(textInputEditTextModifyUserPw)
+                        }
+                        builder.show()
+                        return@setOnClickListener
+                    }
+                }
+
+                if(modifyUserNickName.isEmpty()){
+                    val builder = MaterialAlertDialogBuilder(mainActivity)
+                    builder.setTitle("닉네임 입력 오류")
+                    builder.setMessage("닉네임을 입력해주세요")
+                    builder.setPositiveButton("확인"){ dialogInterface: DialogInterface, i: Int ->
+                        mainActivity.showSoftInput(textInputEditTextModifyUserNickName)
+                    }
+                    builder.show()
+                    return@setOnClickListener
+                }
+
+                if(modifyUserAge.isEmpty()){
+                    val builder = MaterialAlertDialogBuilder(mainActivity)
+                    builder.setTitle("나이 입력 오류")
+                    builder.setMessage("나이를 입력해주세요")
+                    builder.setPositiveButton("확인"){ dialogInterface: DialogInterface, i: Int ->
+                        mainActivity.showSoftInput(textInputEditTextModifyUserAge)
+                    }
+                    builder.show()
+                    return@setOnClickListener
+                }
 
                 if (password != rePassword) {
 
                     textInputEditTextModifyUserPw.error = "두 비밀번호가 일치하지 않아요"
                     textInputEditTextModifyUserPw.error = "두 비밀번호가 일치하지 않아요"
+
                 } else {
 
                     textInputEditTextModifyUserPw.error = null

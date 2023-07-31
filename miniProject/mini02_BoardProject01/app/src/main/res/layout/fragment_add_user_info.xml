@@ -100,7 +100,7 @@
     <!--    </com.google.android.material.button.MaterialButtonToggleGroup>-->
 
     <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/materialCheckBoxAddUSerInfoAll"
+        android:id="@+id/material_check_box_add_user_info_all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -108,11 +108,12 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <LinearLayout
+        android:id="@+id/materialCheckBoxGroupUserInfo1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
         <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/materialCheckBoxAddUserInfoHobby1"
@@ -137,11 +138,12 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/materialCheckBoxGroupUserInfo2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
         <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/materialCheckBoxAddUserInfoHobby4"

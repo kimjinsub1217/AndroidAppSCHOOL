@@ -38,11 +38,11 @@ class PostModifyFragment : Fragment() {
 
                         }
                         R.id.doneModify -> {
-                            val userId = textInputEditTextPostModifyTitle.text
-                            val userPassword = textInputEditTextPostModifyDetail.text
+                            val userTitle = textInputEditTextPostModifyTitle.text
+                            val userDetail = textInputEditTextPostModifyDetail.text
 
-                            val userIdError = if (TextUtils.isEmpty(userId)) "이름을 입력해주세요." else null
-                            val userPasswordError = if (TextUtils.isEmpty(userPassword)) "비밀번호를 입력해주세요." else null
+                            val userIdError = if (TextUtils.isEmpty(userTitle)) "제목을 입력해주세요." else null
+                            val userPasswordError = if (TextUtils.isEmpty(userDetail)) "내용를 입력해주세요." else null
 
                             textInputLayoutPostModifyTitle.error = userIdError
                             textInputLayoutPostModifyDetail.error = userPasswordError
