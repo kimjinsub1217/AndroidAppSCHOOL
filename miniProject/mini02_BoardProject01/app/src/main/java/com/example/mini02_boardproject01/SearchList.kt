@@ -2,13 +2,12 @@ package com.example.mini02_boardproject01
 
 class SearchList {
     companion object {
-        var ListSearch = mutableListOf<SearchListClass>()
+        var ListSearch = mutableListOf<DataModel>()
     }
 }
 
-data class SearchListClass(
-    var idx: Int,
-    var title: String,
-    var details: String
+data class DataModel(
+    val value1: String,
+    val value2: String
 )
 

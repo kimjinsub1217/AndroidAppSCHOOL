@@ -1,5 +1,6 @@
 package com.example.mini02_boardproject01
 
+import android.Manifest
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
@@ -18,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.mini02_boardproject01.databinding.ActivityMainBinding
 import com.google.android.material.transition.MaterialSharedAxis
+import javax.security.auth.Subject
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
@@ -35,7 +37,23 @@ class MainActivity : AppCompatActivity() {
         val POST_WRITE_FRAGMENT = "PostWriteFragment"
         val POST_READ_FRAGMENT = "PostReadFragment"
         val POST_MODIFY_FRAGMENT = "PostModifyFragment"
+        lateinit var mainActivity: MainActivity
     }
+
+    val permissionList = arrayOf(
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.ACCESS_MEDIA_LOCATION,
+        Manifest.permission.INTERNET,
+        Manifest.permission.CAMERA
+    )
+
+    // 로그인한 사용자의 정보를 담을 객체
+    lateinit var loginUserClass: UserClass
+
+    // 게시판 종류
+    val boardTypeList = arrayOf(
+        "자유게시판", "유머게시판", "질문게시판", "스포츠게시판"
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +64,8 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
 
+        mainActivity = this
+        requestPermissions(permissionList, 0)
         replaceFragment(LOGIN_FRAGMENT, false, null)
     }
 
@@ -167,7 +187,7 @@ class MainActivity : AppCompatActivity() {
 
 // 사용자 정보를 담을 클래스
 data class UserClass(
-    var userIdx:Long,
+    var userIdx: Long,
     var userId: String,
     var userPw: String,
     var userNickname: String,
@@ -178,4 +198,16 @@ data class UserClass(
     var hobby4: Boolean,
     var hobby5: Boolean,
     var hobby6: Boolean
+)
+
+// 게시글 정보를 담을 클래스
+data class PostDataClass(
+    var postIdx: Long, // 게시글 인덱스 번호
+    var postType: Long,
+    var postSubject: String,
+    var postText: String,
+    var postWriteDate: String,
+    var postImage: String,
+    val postWriterIdx: Long // 작성자 인덱스 번호
+
 )

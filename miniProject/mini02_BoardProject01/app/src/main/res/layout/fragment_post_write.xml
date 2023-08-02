@@ -72,16 +72,24 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutPostWriteDetail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/imageView"
+                android:layout_height="wrap_content"
+                android:text="게시판 타입 선택" />
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
-                android:layout_marginBottom="100dp"
                 android:adjustViewBounds="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textInputLayoutPostWriteDetail"
+                app:layout_constraintTop_toBottomOf="@id/button"
                 app:srcCompat="@drawable/a1" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
