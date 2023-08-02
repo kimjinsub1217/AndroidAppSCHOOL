@@ -90,6 +90,7 @@ class MainActivity : AppCompatActivity() {
 
             button3.setOnClickListener {
                 // 이미지 수정은 이미지 업로드와 동일하다.
+
                 // 다른 이미지를 같은 파일 명으로 업로드하면 덮어 씌워진다.
                 val newIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                 newIntent.setType("image/*")
@@ -103,7 +104,7 @@ class MainActivity : AppCompatActivity() {
                 val fileRef = storage.reference.child(fileName)
                 // 파일을 삭제한다.
                 fileRef.delete().addOnCompleteListener {
-                    Snackbar.make(activityMainBinding.root, "삭제되었습니다", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(activityMainBinding.root, "삭제되었습니다 ", Snackbar.LENGTH_SHORT).show()
                 }
             }
         }
