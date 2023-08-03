@@ -29,6 +29,7 @@ class HomeFragment : Fragment() {
     var newFragment: Fragment? = null
     var oldFragment: Fragment? = null
     lateinit var homeToolbar: MaterialToolbar
+    var userIdx = 0L
 
     companion object {
         val POST_LIST_FRAGMENT = "PostListFragment"
@@ -36,6 +37,7 @@ class HomeFragment : Fragment() {
         val LOGINFRAGMENT = "LoginFragment"
         val MODIFY_USER_BASIC_FRAGMENT = "ModifyUserBasicFramgent"
         val MODIFY_USER_ADDITIONAL_FRAGMENT = "ModifyUserAdditionalFragment"
+
     }
 
 
@@ -46,6 +48,7 @@ class HomeFragment : Fragment() {
 
         fragmentHomeBinding = FragmentHomeBinding.inflate(inflater)
         mainActivity = activity as MainActivity
+
 
         fragmentHomeBinding.run {
             homeToolbar = toolbarHome
@@ -63,23 +66,43 @@ class HomeFragment : Fragment() {
                 when (menuItem.itemId) {
                     // 전체 게시판
                     R.id.allBoard -> {
-                        replaceFragment(POST_LIST_FRAGMENT, false, false, null)
+                        toolbarHome.title = "전체게시판"
+                        val newBundle = Bundle()
+                        newBundle.putInt("postType", 0)
+                        replaceFragment(POST_LIST_FRAGMENT, false, false, newBundle)
+                        drawerLayout.close()
                     }
                     // 자유 게시판
                     R.id.freeBoard -> {
-                        replaceFragment(POST_LIST_FRAGMENT, false, false, null)
+                        toolbarHome.title = "자유게시판"
+                        val newBundle = Bundle()
+                        newBundle.putInt("postType", 1)
+                        replaceFragment(POST_LIST_FRAGMENT, false, false, newBundle)
+                        drawerLayout.close()
                     }
                     // 유머 게시판
                     R.id.humorBoard -> {
-                        replaceFragment(POST_LIST_FRAGMENT, false, false, null)
+                        toolbarHome.title = "유머게시판"
+                        val newBundle = Bundle()
+                        newBundle.putInt("postType", 2)
+                        replaceFragment(POST_LIST_FRAGMENT, false, false, newBundle)
+                        drawerLayout.close()
                     }
                     // 질문 게시판
                     R.id.questionBoard -> {
-                        replaceFragment(POST_LIST_FRAGMENT, false, false, null)
+                        toolbarHome.title = "질문게시판"
+                        val newBundle = Bundle()
+                        newBundle.putInt("postType", 3)
+                        replaceFragment(POST_LIST_FRAGMENT, false, false, newBundle)
+                        drawerLayout.close()
                     }
                     // 스포츠 게시판
                     R.id.sportsBoard -> {
-                        replaceFragment(POST_LIST_FRAGMENT, false, false, null)
+                        toolbarHome.title = "스포츠게시판"
+                        val newBundle = Bundle()
+                        newBundle.putInt("postType", 4)
+                        replaceFragment(POST_LIST_FRAGMENT, false, false, newBundle)
+                        drawerLayout.close()
                     }
                     // 사용자 정보 수정
                     R.id.item_board_main_user_info -> {
@@ -99,8 +122,9 @@ class HomeFragment : Fragment() {
                 true
             }
         }
-
-        replaceFragment(POST_LIST_FRAGMENT, true, false, null)
+        val newBundle = Bundle()
+        newBundle.putInt("postType", 0)
+        replaceFragment(POST_LIST_FRAGMENT, true, false, newBundle)
         return fragmentHomeBinding.root
     }
 

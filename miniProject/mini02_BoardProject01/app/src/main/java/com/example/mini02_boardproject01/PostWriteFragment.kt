@@ -27,6 +27,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.example.mini02_boardproject01.databinding.FragmentPostWriteBinding
+import com.example.mini02_boardproject01.repository.PostRepository
 import com.example.mini02_boardproject01.repository.RepositoryPostList.Companion.addData
 import com.example.mini02_boardproject01.vm.TestData
 import com.example.mini02_boardproject01.vm.ViewModelPostList
@@ -50,6 +51,7 @@ class PostWriteFragment : Fragment() {
     var boardType = 0
 
     var idx = 0L
+
     // 업로드할 이미지의 Uri
     var uploadUri: Uri? = null
 
@@ -61,6 +63,8 @@ class PostWriteFragment : Fragment() {
 
     val fileName = "image/test.jpg"
 
+    var userIdx=0L
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,6 +72,7 @@ class PostWriteFragment : Fragment() {
 
         fragmentPostWriteBinding = FragmentPostWriteBinding.inflate(inflater)
         mainActivity = activity as MainActivity
+
 
         // 카메라 설정
         cameraLauncher = cameraSetting(fragmentPostWriteBinding.imageView)
@@ -129,6 +134,7 @@ class PostWriteFragment : Fragment() {
                             val subject = textInputEditTextPostWriteTitle.text.toString()
                             val text = textInputEditTextPostWriteDetail.text.toString()
 
+
                             if (subject.isEmpty()) {
                                 val builder = MaterialAlertDialogBuilder(mainActivity)
                                 builder.setTitle("제목 입력 오류")
@@ -164,9 +170,9 @@ class PostWriteFragment : Fragment() {
                             val userDetail = textInputEditTextPostWriteDetail.text
 
 
-                            val t1 = TestData(idx,userName.toString(),userDetail.toString())
+                            val t1 = TestData(idx, userName.toString(), userDetail.toString())
                             idx++
-                            addData(requireContext(),t1)
+                            addData(requireContext(), t1)
 
                             val userIdError =
                                 if (TextUtils.isEmpty(userName)) "이름을 입력해주세요." else null
@@ -179,7 +185,7 @@ class PostWriteFragment : Fragment() {
                             val database = FirebaseDatabase.getInstance()
                             // 게시글 인덱스 번호
                             val postIdxRef = database.getReference("PostIdx")
-                            postIdxRef.get().addOnCompleteListener {
+                            PostRepository.getPostIdx {
                                 var postIdx = it.result.value as Long
                                 // 게시글 인덱스를 증가한다.
                                 postIdx++
@@ -194,45 +200,47 @@ class PostWriteFragment : Fragment() {
                                     "image/img_${System.currentTimeMillis()}.jpg"
                                 }
 
-                                val postDateClass = PostDataClass(
+                                val postDataClass = PostDataClass(
                                     postIdx, boardType.toLong(), subject,
                                     text, writeDate, fileName, mainActivity.loginUserClass.userIdx
                                 )
                                 val postDataRef = database.getReference("PostData")
-                                postDataRef.push().setValue(postDateClass).addOnCompleteListener {
+                                PostRepository.addPostInfo(postDataClass) {
                                     // 게시글 인덱스번호 저장
-                                    postIdxRef.get().addOnCompleteListener {
-                                        it.result.ref.setValue(postIdx).addOnCompleteListener {
 
-                                            // 이미지 업로드
-                                            if (uploadUri != null) {
-                                                val storage = FirebaseStorage.getInstance()
-                                                val imageRef = storage.reference.child(fileName)
-                                                imageRef.putFile(uploadUri!!)
-                                                    .addOnCompleteListener {
-                                                        Snackbar.make(
-                                                            fragmentPostWriteBinding.root,
-                                                            "저장되었습니다",
-                                                            Snackbar.LENGTH_SHORT
-                                                        ).show()
+                                    PostRepository.setPostIdx(postIdx) {
 
-                                                        if (userIdError == null && userPasswordError == null) {
-                                                            mainActivity.removeFragment(MainActivity.POST_WRITE_FRAGMENT)
-                                                        }
+                                        // 글 번호를 번들에 담아준다.
+                                        val newBundle = Bundle()
+                                        newBundle.putLong("readPostIdx", postIdx)
+                                        newBundle.putLong("userIdx", userIdx)
+
+                                        // 이미지 업로드
+                                        if (uploadUri != null) {
+                                            PostRepository.uploadImage(uploadUri!!, fileName){
+                                                    Snackbar.make(
+                                                        fragmentPostWriteBinding.root,
+                                                        "저장되었습니다",
+                                                        Snackbar.LENGTH_SHORT
+                                                    ).show()
+
+                                                    if (userIdError == null && userPasswordError == null) {
+                                                        mainActivity.replaceFragment(MainActivity.POST_READ_FRAGMENT,true,newBundle)
                                                     }
-                                            } else {
-                                                Snackbar.make(
-                                                    fragmentPostWriteBinding.root,
-                                                    "저장되었습니다",
-                                                    Snackbar.LENGTH_SHORT
-                                                ).show()
-
-                                                if (userIdError == null && userPasswordError == null) {
-                                                    mainActivity.removeFragment(MainActivity.POST_WRITE_FRAGMENT)
                                                 }
+                                        } else {
+                                            Snackbar.make(
+                                                fragmentPostWriteBinding.root,
+                                                "저장되었습니다",
+                                                Snackbar.LENGTH_SHORT
+                                            ).show()
+
+                                            if (userIdError == null && userPasswordError == null) {
+                                                mainActivity.replaceFragment(MainActivity.POST_READ_FRAGMENT,true,newBundle)
                                             }
                                         }
                                     }
+
                                 }
 
                             }

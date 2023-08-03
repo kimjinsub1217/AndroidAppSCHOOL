@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mini02_boardproject01.databinding.FragmentPostListBinding
-import com.example.mini02_boardproject01.vm.ViewModelPostList
+import com.example.mini02_boardproject01.vm.PostViewModel
 import com.google.android.material.divider.MaterialDividerItemDecoration
 
 
@@ -18,11 +18,8 @@ class PostListFragment : Fragment() {
     lateinit var homeFragment: HomeFragment
     lateinit var mainActivity: MainActivity
 
-    private lateinit var viewModel: ViewModelPostList
-    private lateinit var adapter: PostAdapter
-
-
-
+    //    private lateinit var viewModel: ViewModelPostList
+    lateinit var postViewModel: PostViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,7 +29,17 @@ class PostListFragment : Fragment() {
         homeFragment = requireParentFragment() as HomeFragment
         mainActivity = activity as MainActivity
 
-        viewModel = ViewModelProvider(this)[ViewModelPostList::class.java]
+//        userIdx =arguments?.getLong("userIdx")!!
+//        val newBundle = Bundle()
+//        newBundle.putLong("userIdx", userIdx)
+
+//        viewModel = ViewModelProvider(this)[ViewModelPostList::class.java]
+        postViewModel = ViewModelProvider(mainActivity)[PostViewModel::class.java]
+        postViewModel.run {
+            postDataList.observe(mainActivity) {
+                fragmentPostListBinding.recyclerView.adapter?.notifyDataSetChanged()
+            }
+        }
         fragmentPostListBinding.run {
             searchBar.run {
                 hint = "검색어를 입력하세요"
@@ -41,7 +48,8 @@ class PostListFragment : Fragment() {
                 setOnMenuItemClickListener {
                     when (it.itemId) {
                         R.id.writing -> {
-                            mainActivity.replaceFragment(MainActivity.POST_WRITE_FRAGMENT,
+                            mainActivity.replaceFragment(
+                                MainActivity.POST_WRITE_FRAGMENT,
                                 addToBackStack = true,
                                 bundle = null
                             )
@@ -54,26 +62,45 @@ class PostListFragment : Fragment() {
 
 
 
-            recyclerViewPostListResult.run {
+            recyclerView.run {
 
-                adapter = PostAdapter(viewModel)
+                adapter = PostAdapter(postViewModel)
                 layoutManager = LinearLayoutManager(context)
-                addItemDecoration(MaterialDividerItemDecoration(requireContext(), MaterialDividerItemDecoration.VERTICAL))
+                addItemDecoration(
+                    MaterialDividerItemDecoration(
+                        requireContext(),
+                        MaterialDividerItemDecoration.VERTICAL
+                    )
+                )
             }
 
-            viewModel.run {
-                dataList.observe(viewLifecycleOwner) {
-                    recyclerViewPostListResult.adapter?.notifyDataSetChanged()
-                }
-            }
+//            recyclerViewPostListResult.run {
+//
+//                adapter = ResultAdapter(postViewModel)
+//                layoutManager = LinearLayoutManager(context)
+//                addItemDecoration(
+//                    MaterialDividerItemDecoration(
+//                        requireContext(),
+//                        MaterialDividerItemDecoration.VERTICAL
+//                    )
+//                )
+//            }
 
+            postViewModel.run {
+//                dataList.observe(viewLifecycleOwner) {
+//                    recyclerViewPostListResult.adapter?.notifyDataSetChanged()
+//                }
+            }
+            // 게시판 타입 번호를 전달하여 게시글 정보를 가져온다.
+            postViewModel.getPostAll(arguments?.getLong("postType")!!)
         }
         return fragmentPostListBinding.root
     }
-    override fun onResume() {
-        super.onResume()
-        // ViewModel 에 있는 모든 데이터를 가져오는 메서드를 호출한다.
-        viewModel.getAll()
-    }
+
+//    override fun onResume() {
+//        super.onResume()
+//        // ViewModel 에 있는 모든 데이터를 가져오는 메서드를 호출한다.
+//        viewModel.getAll()
+//    }
 }
 

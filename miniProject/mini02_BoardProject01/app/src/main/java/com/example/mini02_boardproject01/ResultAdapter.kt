@@ -1,15 +1,14 @@
 package com.example.mini02_boardproject01
 
-import android.app.Activity
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mini02_boardproject01.SearchList.Companion.ListSearch
 import com.example.mini02_boardproject01.databinding.ItemViewBinding
+import com.example.mini02_boardproject01.vm.PostViewModel
 
-//class ResultAdapter(val mainActivity: MainActivity) :
+//class ResultAdapter(val postViewModel: PostViewModel) :
 //    RecyclerView.Adapter<ResultAdapter.ResultViewHolder>() {
 //
 //    inner class ResultViewHolder(itemView: ItemViewBinding) : RecyclerView.ViewHolder(itemView.root) {
@@ -21,10 +20,12 @@ import com.example.mini02_boardproject01.databinding.ItemViewBinding
 //
 //            itemView.root.setOnClickListener {
 //                // 사용자가 선택한 메모의 인덱스값을 전달한다.
-//                val idx = ListSearch[adapterPosition].idx
-//                val newBundle = Bundle()
-//                newBundle.putInt("memo_idx", idx)
-//                mainActivity.replaceFragment(MainActivity.POST_READ_FRAGMENT, true,  null)
+////                val idx = ListSearch[adapterPosition].idx
+////                val newBundle = Bundle()
+////                newBundle.putInt("memo_idx", idx)
+////                mainActivity.replaceFragment(MainActivity.POST_READ_FRAGMENT, true,  null)
+//
+//                val readPostIdx = postViewModel.postDataList.value?.get()
 //
 //            }
 //        }

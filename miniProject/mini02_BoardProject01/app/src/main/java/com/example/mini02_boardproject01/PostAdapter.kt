@@ -1,14 +1,15 @@
 package com.example.mini02_boardproject01
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mini02_boardproject01.SearchList.Companion.ListSearch
+import com.example.mini02_boardproject01.MainActivity.Companion.mainActivity
 import com.example.mini02_boardproject01.databinding.ItemViewBinding
-import com.example.mini02_boardproject01.vm.ViewModelPostList
+import com.example.mini02_boardproject01.vm.PostViewModel
 
-class PostAdapter(val viewModel: ViewModelPostList) :
+class PostAdapter(val postViewModel: PostViewModel) :
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
     inner class PostViewHolder(itemView: ItemViewBinding) : RecyclerView.ViewHolder(itemView.root) {
@@ -22,6 +23,14 @@ class PostAdapter(val viewModel: ViewModelPostList) :
 //                val newBundle = Bundle()
 //                newBundle.putInt("memo_idx", idx)
 //                mainActivity.replaceFragment(MainActivity.POST_READ_FRAGMENT,true,null)
+
+                itemView.root.setOnClickListener {
+                    // 항목 번째 글 번호를 가져온다.
+                    val readPostIdx = postViewModel.postDataList.value?.get(adapterPosition)?.postIdx
+                    val newBundle = Bundle()
+                    newBundle.putLong("readPostIdx", readPostIdx!!)
+                    mainActivity.replaceFragment(MainActivity.POST_READ_FRAGMENT, true, newBundle)
+                }
 
             }
         }
@@ -40,12 +49,12 @@ class PostAdapter(val viewModel: ViewModelPostList) :
     }
 
     override fun getItemCount(): Int {
-        return viewModel.dataList.value?.size!!
+        return postViewModel.postDataList.value?.size!!
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        holder.textView.text = "제목 : ${viewModel.dataList.value?.get(position)?.data1}"
-        holder.nickNameView.text = "작성자 : ${viewModel.dataList.value?.get(position)?.data2}"
+        holder.textView.text = "제목 : ${postViewModel.postDataList.value?.get(position)?.postSubject}"
+//        holder.nickNameView.text = "작성자 : ${viewModel.postDataList.value?.get(position)}"
     }
 
 }

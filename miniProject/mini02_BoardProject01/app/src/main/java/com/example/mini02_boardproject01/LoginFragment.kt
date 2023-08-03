@@ -4,12 +4,16 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.example.mini02_boardproject01.databinding.FragmentLoginBinding
+import com.example.mini02_boardproject01.repository.UserRepository
+import com.example.mini02_boardproject01.vm.UserViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.FirebaseDatabase
@@ -18,7 +22,7 @@ class LoginFragment : Fragment() {
 
     lateinit var fragmentLoginBinding: FragmentLoginBinding
     lateinit var mainActivity: MainActivity
-
+    lateinit var userViewModel: UserViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,6 +30,7 @@ class LoginFragment : Fragment() {
 
         fragmentLoginBinding = FragmentLoginBinding.inflate(inflater)
         mainActivity = activity as MainActivity
+        userViewModel = ViewModelProvider(mainActivity)[UserViewModel::class.java]
 
         fragmentLoginBinding.run {
             // toolbar
@@ -88,9 +93,10 @@ class LoginFragment : Fragment() {
 
                 val database = FirebaseDatabase.getInstance()
                 val userDataRef = database.getReference("UserData")
+//                userDataRef.orderByChild("userId").equalTo(userId.toString()).get().addOnCompleteListener {
 
                 // userId가 사용자가 입력한 아이디와 같은 데이터를 가져온다.
-                userDataRef.orderByChild("userId").equalTo(userId.toString()).get().addOnCompleteListener {
+                UserRepository.getUserInfoByUserId(userId.toString()){
                     // 가져온 데이터가 없다면
                     if(!it.result.exists()){
                         val builder = MaterialAlertDialogBuilder(mainActivity)
@@ -109,7 +115,7 @@ class LoginFragment : Fragment() {
                         for(c1 in it.result.children){
                             // 가져온 데이터에서 비밀번호를 가져온다.
                             val userPw = c1.child("userPw").value as String
-
+                            Log.d("유저 패스워드",userPw.toString())
                             // 입력한 비밀번호와 현재 계정의 비밀번호가 다르다면
                             if(userPassword.toString() != userPw){
                                 val builder = MaterialAlertDialogBuilder(mainActivity)
@@ -137,11 +143,14 @@ class LoginFragment : Fragment() {
                                 val hobby5 =c1.child("hobby5").value as Boolean
                                 val hobby6 =c1.child("hobby6").value as Boolean
 
+                                val newBundle = Bundle()
+                                newBundle.putLong("userIdx", userIdx)
+
                                 mainActivity.loginUserClass = UserClass(userIdx, userId, userPw, userNickname, userAge, hobby1, hobby2, hobby3, hobby4, hobby5, hobby6)
                                 Snackbar.make(fragmentLoginBinding.root, "로그인 되었습니다", Snackbar.LENGTH_SHORT).show()
 
                                 if (userIdError == null && userPasswordError == null) {
-                                    mainActivity.replaceFragment(MainActivity.HOME_FRAGMENT, false, null)
+                                    mainActivity.replaceFragment(MainActivity.HOME_FRAGMENT, false, newBundle)
                                 }
                             }
                         }
@@ -156,7 +165,14 @@ class LoginFragment : Fragment() {
 
         }
 
+
+
         return fragmentLoginBinding.root
+    }
+    override fun onResume() {
+        super.onResume()
+
+        userViewModel.reset()
     }
 
 }

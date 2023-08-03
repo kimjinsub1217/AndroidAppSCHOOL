@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     // 게시판 종류
     val boardTypeList = arrayOf(
-        "자유게시판", "유머게시판", "질문게시판", "스포츠게시판"
+        "전체게시판", "유머게시판", "질문게시판", "스포츠게시판"
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -208,6 +208,6 @@ data class PostDataClass(
     var postText: String,
     var postWriteDate: String,
     var postImage: String,
-    val postWriterIdx: Long // 작성자 인덱스 번호
+    val postWriterIdx: Long, // 작성자 인덱스 번호
 
 )

@@ -1,10 +1,7 @@
 package com.example.mini02_boardproject01
 
-import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.DialogInterface
-import android.graphics.Color
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.os.SystemClock
 import android.text.TextUtils
@@ -14,18 +11,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.lifecycle.ViewModelProvider
 import com.example.mini02_boardproject01.databinding.FragmentJoinBinding
+import com.example.mini02_boardproject01.vm.UserViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.database.FirebaseDatabase
 import kotlin.concurrent.thread
 
 
 class JoinFragment : Fragment() {
+
     lateinit var fragmentJoinBinding: FragmentJoinBinding
     lateinit var mainActivity: MainActivity
+
+    lateinit var userViewModel: UserViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,6 +31,18 @@ class JoinFragment : Fragment() {
         fragmentJoinBinding = FragmentJoinBinding.inflate(inflater)
         mainActivity = activity as MainActivity
 
+        userViewModel = ViewModelProvider(mainActivity)[UserViewModel::class.java]
+        userViewModel.run{
+            userId.observe(mainActivity){
+                fragmentJoinBinding.textInputEditTextJoinUserId.setText(it)
+            }
+            userPw.observe(mainActivity){
+                fragmentJoinBinding.textInputEditTextJoinUserPassword.setText(it)
+            }
+            userPw2.observe(mainActivity){
+                fragmentJoinBinding.textInputEditTextJoinUserRePassword.setText(it)
+            }
+        }
         fragmentJoinBinding.run {
 
 
@@ -186,5 +196,10 @@ class JoinFragment : Fragment() {
 
         }
         return fragmentJoinBinding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        userViewModel.reset()
     }
 }

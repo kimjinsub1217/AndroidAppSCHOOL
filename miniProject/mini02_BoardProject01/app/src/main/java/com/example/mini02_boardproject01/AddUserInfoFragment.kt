@@ -12,13 +12,12 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.view.children
 import com.example.mini02_boardproject01.databinding.FragmentAddUserInfoBinding
+import com.example.mini02_boardproject01.repository.UserRepository
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.FirebaseDatabase
 import kotlin.concurrent.thread
-
-
 
 class AddUserInfoFragment : Fragment() {
     lateinit var fragmentAddUserInfoBinding: FragmentAddUserInfoBinding
@@ -103,49 +102,36 @@ class AddUserInfoFragment : Fragment() {
 
                 userIdxRef.get().addOnCompleteListener {
 
+                    UserRepository.getUserIdx {
+                        // 현재의 사용자 순서값을 가져온다.
+                        var userIdx = it.result.value as Long
 
-                    // 현재의 사용자 순서값을 가져온다.
-                    var userIdx = it.result.value as Long
+                        // 저장할 데이터들을 담는다.
+                        val joinUserId = arguments?.getString("joinUserId")!!
+                        val joinUserPw = arguments?.getString("joinUserPw")!!
 
-                    // 저장할 데이터들을 담는다.
-                    val joinUserId = arguments?.getString("joinUserId")!!
-                    val joinUserPw = arguments?.getString("joinUserPw")!!
+                        // 사용자 인덱스 번호 1 증가
+                        userIdx++
 
-                    // 사용자 인덱스 번호 1 증가
-                    userIdx++
-
-                    val userClass = UserClass(
-                        userIdx,
-                        joinUserId,
-                        joinUserPw,
-                        userNickName.toString(),
-                        joinUserAge.toString().toLong(),
-                        materialCheckBoxAddUserInfoHobby1.isChecked,
-                        materialCheckBoxAddUserInfoHobby2.isChecked,
-                        materialCheckBoxAddUserInfoHobby3.isChecked,
-                        materialCheckBoxAddUserInfoHobby4.isChecked,
-                        materialCheckBoxAddUserInfoHobby5.isChecked,
-                        materialCheckBoxAddUserInfoHobby6.isChecked
-                    )
+                        val userClass = UserClass(
+                            userIdx,
+                            joinUserId,
+                            joinUserPw,
+                            userNickName.toString(),
+                            joinUserAge.toString().toLong(),
+                            materialCheckBoxAddUserInfoHobby1.isChecked,
+                            materialCheckBoxAddUserInfoHobby2.isChecked,
+                            materialCheckBoxAddUserInfoHobby3.isChecked,
+                            materialCheckBoxAddUserInfoHobby4.isChecked,
+                            materialCheckBoxAddUserInfoHobby5.isChecked,
+                            materialCheckBoxAddUserInfoHobby6.isChecked
+                        )
 
 
-
-                    if (userIdError == null && userPasswordError == null) {
                         // 저장한다.
-                        val userDataRef = database.getReference("UserData")
-
-                        userDataRef.push().setValue(userClass).addOnCompleteListener {
-
-                            userIdxRef.get().addOnCompleteListener {
-
-
-                                it.result.ref.setValue(userIdx)
-
-                                Snackbar.make(
-                                    fragmentAddUserInfoBinding.root,
-                                    "가입이 완료되었습니다",
-                                    Snackbar.LENGTH_SHORT
-                                ).show()
+                        UserRepository.addUserInfo(userClass){
+                            UserRepository.setUserIdx(userIdx) {
+                                Snackbar.make(fragmentAddUserInfoBinding.root, "가입이 완료되었습니다", Snackbar.LENGTH_SHORT).show()
 
                                 mainActivity.removeFragment(MainActivity.ADD_USER_INFO_FRAGMENT)
                                 mainActivity.removeFragment(MainActivity.JOIN_FRAGMENT)
@@ -155,33 +141,33 @@ class AddUserInfoFragment : Fragment() {
                 }
             }
 //            materialCheckBoxAddUSerInfoAll.checkedState=MaterialCheckBox.STATE_INDETERMINATE
-                // 취미 전체 체크박스
-                materialCheckBoxAddUserInfoAll.run {
-                    setOnCheckedChangeListener { compoundButton, b ->
-                        // 각 체크박스를 가지고 있는 레이아웃을 통해 그 안에 있는 View들의 체크상태를 변경한다.
-                        for (v1 in materialCheckBoxGroupUserInfo1.children) {
-                            // 형변환
-                            v1 as MaterialCheckBox
-                            // 취미 전체가 체크 되어 있다면
-                            if (b) {
-                                v1.checkedState = MaterialCheckBox.STATE_CHECKED
-                            } else {
-                                v1.checkedState = MaterialCheckBox.STATE_UNCHECKED
-                            }
+            // 취미 전체 체크박스
+            materialCheckBoxAddUserInfoAll.run {
+                setOnCheckedChangeListener { compoundButton, b ->
+                    // 각 체크박스를 가지고 있는 레이아웃을 통해 그 안에 있는 View들의 체크상태를 변경한다.
+                    for (v1 in materialCheckBoxGroupUserInfo1.children) {
+                        // 형변환
+                        v1 as MaterialCheckBox
+                        // 취미 전체가 체크 되어 있다면
+                        if (b) {
+                            v1.checkedState = MaterialCheckBox.STATE_CHECKED
+                        } else {
+                            v1.checkedState = MaterialCheckBox.STATE_UNCHECKED
                         }
+                    }
 
-                        for (v1 in materialCheckBoxGroupUserInfo2.children) {
-                            // 형변환
-                            v1 as MaterialCheckBox
-                            // 취미 전체가 체크 되어 있다면
-                            if (b) {
-                                v1.checkedState = MaterialCheckBox.STATE_CHECKED
-                            } else {
-                                v1.checkedState = MaterialCheckBox.STATE_UNCHECKED
-                            }
+                    for (v1 in materialCheckBoxGroupUserInfo2.children) {
+                        // 형변환
+                        v1 as MaterialCheckBox
+                        // 취미 전체가 체크 되어 있다면
+                        if (b) {
+                            v1.checkedState = MaterialCheckBox.STATE_CHECKED
+                        } else {
+                            v1.checkedState = MaterialCheckBox.STATE_UNCHECKED
                         }
                     }
                 }
+            }
 
 
             // 다른 체크박스 들...

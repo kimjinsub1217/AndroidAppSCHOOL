@@ -40,6 +40,51 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutPostReadNickName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:transitionGroup="true"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/edit"
+        app:startIconScaleType="centerCrop"
+        app:startIconTint="@color/white">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditTextPostReadNickName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="작성자"
+            android:text="작성자"
+            android:enabled="false"
+            android:inputType="textPersonName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutPostReadDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:transitionGroup="true"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/edit"
+        app:startIconScaleType="centerCrop"
+        app:startIconTint="@color/white">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditTextPostReadDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="작성날짜"
+            android:text="0000-00-00"
+            android:enabled="false"
+            android:inputType="textPersonName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutPostReadDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,6 +109,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewPostRead"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
